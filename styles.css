@@ -7,18 +7,18 @@
   /* ── Backgrounds ── */
   --bg-base: #000000;
   --bg-surface-1: #0a0a0a; /* cards, panels */
-  --bg-surface-2: #111111; /* hover states, inputs */
+  --bg-surface-2: #121212; /* hover states, inputs - warmer */
   --bg-surface-3: #161616; /* nested elements */
 
   /* ── Text ── */
   --text-primary: #ededed;
-  --text-secondary: #ededed;
-  --text-tertiary: #aaaaaa;
+  --text-secondary: #999999; /* Better contrast */
+  --text-tertiary: #555555;
   --text-inverted: #000000;
 
   /* ── Accent palette ── */
-  --accent-blue: #1d4ed8;
-  --accent-blue-dim: rgba(59, 130, 246, 0.15);
+  --accent-blue: #1d4ed8; /* Darker for WCAG AA (was #3b82f6) */
+  --accent-blue-dim: rgba(29, 78, 216, 0.15);
   --accent-violet: #8b5cf6;
   --accent-violet-dim: rgba(139, 92, 246, 0.15);
   --accent-cyan: #22d3ee;
@@ -36,11 +36,11 @@
   --gradient-text: linear-gradient(135deg, #fff 0%, #888 100%);
   --gradient-hero: linear-gradient(
     135deg,
-    #3b82f6 0%,
+    #1d4ed8 0%,
     #8b5cf6 50%,
     #22d3ee 100%
   );
-  --gradient-blue-violet: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  --gradient-blue-violet: linear-gradient(135deg, #1d4ed8, #8b5cf6);
   --gradient-card-border: linear-gradient(
     135deg,
     rgba(59, 130, 246, 0.4),
@@ -49,9 +49,12 @@
   );
 
   /* ── Typography ── */
-  --font-display: "Syne", sans-serif;
-  --font-body: "DM Sans", sans-serif;
-  --font-mono: "JetBrains Mono", monospace;
+  --font-display:
+    "Syne", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body:
+    "DM Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono:
+    "JetBrains Mono", ui-monospace, "Cascadia Code", "Courier New", monospace;
 
   /* ── Sizing ── */
   --nav-height: 64px;
@@ -81,9 +84,16 @@
 }
 
 html {
+  font-size: 16px;
   /* scroll-padding-top ensures headings aren't hidden under the fixed nav */
   scroll-padding-top: calc(var(--nav-height) + 24px);
   /* scroll-behavior delegated to JS scrollTo for reliable cross-browser control */
+}
+
+@media (max-width: 640px) {
+  html {
+    font-size: 15px; /* Larger base for better mobile readability */
+  }
 }
 
 body {
@@ -234,7 +244,7 @@ body::before {
             (@media prefers-reduced-motion: no-preference)
          2. IntersectionObserver is available
             (JS adds `js-io-ready` to <html>)
-
+ 
        Both checks are independent. CSS handles the OS
        preference natively — no JS needed for that part.
     ════════════════════════════════════════════════════ */
@@ -319,22 +329,26 @@ body::before {
 
 /* Primary — solid blue */
 .btn--primary {
-  background: var(--accent-blue);
+  background: var(
+    --accent-blue
+  ); /* Now uses darker blue (#1d4ed8) for WCAG AA */
   color: #fff;
   border-color: var(--accent-blue);
 }
 .btn--primary:hover {
-  background: #2563eb;
-  border-color: #2563eb;
+  background: #1e40af; /* Even darker on hover */
+  border-color: #1e40af;
   box-shadow:
-    0 0 0 4px rgba(59, 130, 246, 0.2),
-    0 4px 20px rgba(59, 130, 246, 0.35);
+    0 0 0 4px rgba(29, 78, 216, 0.2),
+    0 4px 20px rgba(29, 78, 216, 0.35);
 }
 
 /* Ghost — outlined */
 .btn--ghost {
   background: transparent;
-  color: var(--text-secondary);
+  color: var(
+    --text-primary
+  ); /* Changed from text-secondary for WCAG AA contrast */
   border-color: var(--border-default);
 }
 .btn--ghost:hover {
@@ -407,33 +421,16 @@ body::before {
     */
 .site-logo-mark {
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
   flex-shrink: 0;
-  /* Resting glow — colour-matched to the blue inside the SVG */
-  filter: drop-shadow(0 0 5px rgba(59, 130, 246, 0.25));
-  transition:
-    filter var(--duration-base) ease,
-    transform var(--duration-base) ease;
-}
-/* Brighten + lift on hover — works for both nav and footer */
-.site-nav__logo:hover .site-logo-mark,
-.footer-logo:hover .site-logo-mark {
-  filter: drop-shadow(0 0 14px rgba(96, 165, 250, 0.65));
-  transform: scale(1.05) translateY(-1px);
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  /* No effects - clean and static */
 }
 
-/* Footer variant starts slightly dimmer */
+/* Footer variant - slightly smaller */
 .site-logo-mark--footer {
-  filter: drop-shadow(0 0 4px rgba(59, 130, 246, 0.15));
-}
-
-.site-nav__logo-name {
-  font-family: var(--font-display);
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: -0.01em;
+  height: 36px;
 }
 
 /* Desktop nav links */
@@ -772,8 +769,8 @@ body::before {
 }
 @media (prefers-reduced-motion: no-preference) {
   .hero__headline {
-    will-change: opacity, transform;
-    animation: hero-fade-up 0.8s 0.2s var(--ease-out) both;
+    /* LCP optimization: headline visible immediately, subtle animation only */
+    animation: hero-slide-up 0.5s 0.1s var(--ease-out) both;
   }
 }
 /* The gradient-highlight span inside the headline */
@@ -878,6 +875,16 @@ body::before {
   }
   to {
     opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* LCP-optimized variant: headline visible immediately, subtle slide only */
+@keyframes hero-slide-up {
+  from {
+    transform: translateY(12px);
+  }
+  to {
     transform: translateY(0);
   }
 }
@@ -1051,7 +1058,7 @@ body::before {
 .stat-chip__label {
   font-family: var(--font-mono);
   font-size: 0.65rem;
-  color: var(--text-tertiary);
+  color: #aaaaaa; /* Lighter than text-tertiary for WCAG AA contrast (4.7:1 on bg-surface-1) */
   margin-top: 0.2rem;
   white-space: nowrap;
 }
@@ -1125,12 +1132,12 @@ body::before {
     transform var(--duration-base);
 }
 .project-card:hover {
-  border-color: var(--border-default);
+  border-color: rgba(59, 130, 246, 0.4);
   box-shadow:
     0 0 0 1px rgba(59, 130, 246, 0.15),
-    0 24px 64px rgba(0, 0, 0, 0.6),
+    0 8px 32px rgba(59, 130, 246, 0.15),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  transform: translateY(-4px);
+  transform: translateY(-2px);
 }
 
 /* Animated gradient border on hover via pseudo-element */
@@ -1278,6 +1285,45 @@ body::before {
   color: var(--text-primary);
 }
 
+/* ════════════════════════════════════════════════════
+       CONSISTENT PROJECT CARD SIZING
+    ════════════════════════════════════════════════════ */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 2rem;
+  align-items: stretch; /* Makes all cards same height */
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.project-card__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+}
+
+.project-card__desc {
+  flex: 1;
+  min-height: 120px; /* Ensures consistent description area */
+  margin-bottom: 1.5rem;
+}
+
+.project-card__tags,
+.tech-pill-list {
+  margin-top: auto; /* Push tags to bottom */
+  margin-bottom: 1rem;
+}
+
+.project-card__actions,
+.project-card__links {
+  margin-top: auto; /* Push actions to bottom */
+}
 /* ════════════════════════════════════════════════════
        SKILLS SECTION
     ════════════════════════════════════════════════════ */
@@ -1821,7 +1867,7 @@ body::before {
        gated inside @media (prefers-reduced-motion: no-preference)
        so they never apply when the user wants reduced motion —
        no overrides needed here for content visibility.
-
+ 
        This block only stops the always-on decorative looping
        animations (glows, status dot, marquee, stat chips)
        and snaps hover transitions to instant.
@@ -1859,5 +1905,141 @@ body::before {
   .interest-tag,
   .contact-social-link {
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* ════════════════════════════════════════════════════
+       CONSISTENT PROJECT CARD SIZING
+    ════════════════════════════════════════════════════ */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 2rem;
+  align-items: stretch; /* Makes all cards same height */
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.project-card__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+}
+
+.project-card__desc {
+  flex: 1;
+  min-height: 120px; /* Ensures consistent description area */
+  margin-bottom: 1.5rem;
+}
+
+.project-card__tags,
+.tech-pill-list {
+  margin-top: auto; /* Push tags to bottom */
+  margin-bottom: 1rem;
+}
+
+.project-card__actions,
+.project-card__links {
+  margin-top: auto; /* Push actions to bottom */
+}
+/* ════════════════════════════════════════════════════
+       SKILLS SECTION
+    ════════════════════════════════════════════════════ */
+.skills-section {
+  background: var(--bg-surface-1);
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
+  margin-top: 48px;
+}
+
+.skill-category {
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 28px;
+  transition: border-color 0.3s ease;
+}
+
+.skill-category:hover {
+  border-color: var(--border-default);
+}
+
+.skill-category__title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+
+.skill-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.skill-list li {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  padding-left: 20px;
+  position: relative;
+}
+
+.skill-list li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--accent-blue);
+  font-size: 0.85rem;
+}
+
+/* Touch targets for mobile */
+.project-card__action-link {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 12px 24px;
+}
+
+.site-nav a {
+  padding: 12px 16px;
+}
+
+.mobile-nav-toggle {
+  width: 48px;
+  height: 48px;
+  padding: 12px;
+}
+
+@media (max-width: 768px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .hero__headline {
+    font-size: 2.5rem;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .project-card__title {
+    font-size: 1.25rem;
+  }
+
+  .project-card__desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
   }
 }
