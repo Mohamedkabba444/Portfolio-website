@@ -1,16 +1,3 @@
-//  ══════════════════════════════════════════════════════════════
-//     JAVASCRIPT
-//     All interactions bundled in a single <script> block.
-//     Each section is wrapped in an IIFE with a descriptive name.
-
-//     A. initSmoothScroll   — intercepts all internal anchor links
-//     B. initScrollSpy      — highlights active nav link on scroll
-//     C. initMobileMenu     — hamburger toggle with a11y management
-//     D. initRevealAnimations — scroll-driven fade-up for sections
-//     E. initSkillBarAnimations — fills skill progress bars on entry
-//     F. initContactForm    — validates + submits via Formspree
-//   ══════════════════════════════════════════════════════════════
-
 "use strict";
 
 /* ──────────────────────────────────────────────────────────
@@ -417,7 +404,7 @@ function closeMobileMenu() {
       ].join("\n");
 
       var mailtoHref =
-        "mailto:hello@mdkportfolio.dev" +
+        "mailto:kabbamohamed444@gmail.com" +
         "?subject=" +
         encodeURIComponent(subjectValue) +
         "&body=" +
@@ -485,7 +472,7 @@ function closeMobileMenu() {
         submitButton.querySelector(".form-submit-btn__label").textContent =
           "Send message";
         updateFormStatus(
-          "Network error. Please email hello@mdkportfolio.dev directly.",
+          "Network error. Please email kabbamohamed444@gmail.com directly.",
           "error",
         );
       });
