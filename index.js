@@ -319,6 +319,7 @@ function closeMobileMenu() {
   var emailField = document.getElementById("contact-email");
   var subjectField = document.getElementById("contact-subject");
   var messageField = document.getElementById("contact-message");
+  var honeypotField = document.getElementById("contact-website");
   var statusEl = document.getElementById("contact-status");
   var submitButton = document.getElementById("contact-submit-btn");
 
@@ -391,6 +392,13 @@ function closeMobileMenu() {
 
     if (!formIsValid) {
       updateFormStatus("Please fill in all fields correctly.", "error");
+      return;
+    }
+
+    // Real visitors never see or fill this field.
+    if (honeypotField && honeypotField.value.trim()) {
+      updateFormStatus("Thanks, your message is on its way.", "success");
+      contactForm.reset();
       return;
     }
 

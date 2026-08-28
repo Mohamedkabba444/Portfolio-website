@@ -536,7 +536,10 @@ body::before {
 
 /* Mobile slide-down menu */
 .mobile-menu {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-0.75rem);
   position: fixed;
   top: var(--nav-height);
   left: 0;
@@ -547,9 +550,16 @@ body::before {
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border-subtle);
   padding: 1.25rem 1.5rem 1.75rem;
+  transition:
+    opacity var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out),
+    visibility var(--duration-base);
 }
 .mobile-menu.is-open {
-  display: block;
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
 }
 .mobile-menu__links {
   list-style: none;
@@ -1112,6 +1122,13 @@ body::before {
   margin-bottom: 3rem;
 }
 
+.projects-section-intro {
+  max-width: 34rem;
+  margin-top: 0.75rem;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -1138,6 +1155,10 @@ body::before {
     0 8px 32px rgba(59, 130, 246, 0.15),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
   transform: translateY(-2px);
+}
+.project-card:focus-within {
+  border-color: rgba(59, 130, 246, 0.4);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.14);
 }
 
 /* Animated gradient border on hover via pseudo-element */
@@ -1283,6 +1304,25 @@ body::before {
 }
 .project-card__action-link:hover {
   color: var(--text-primary);
+}
+
+.project-card__availability {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-tertiary);
+  min-height: 44px;
+  padding-block: 12px;
+}
+.project-card__availability::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent-amber);
+  box-shadow: 0 0 8px rgba(251, 191, 36, 0.35);
 }
 
 /* ════════════════════════════════════════════════════
@@ -1532,6 +1572,14 @@ body::before {
   flex-direction: column;
   gap: 0.4rem;
   margin-bottom: 1rem;
+}
+.form-field--trap {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 .form-field:last-child {
   margin-bottom: 0;
@@ -1804,11 +1852,22 @@ body::before {
 
   /* Hero adjustments */
   .hero__inner {
-    padding-block: 3.5rem;
+    padding-block: 2.5rem 4.5rem;
+  }
+  .hero__status-pill {
+    margin-bottom: 1.5rem;
+  }
+  .hero__headline {
+    margin-bottom: 1.25rem;
+  }
+  .hero__description {
+    margin-bottom: 1.75rem;
   }
   .hero__actions {
     flex-direction: column;
     align-items: stretch;
+    width: min(100%, 25rem);
+    margin-inline: auto;
   }
   .hero__actions .btn {
     justify-content: center;

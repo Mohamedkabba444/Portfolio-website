@@ -1,10 +1,10 @@
-# Backend Developer Portfolio
+# Full-Stack Developer Portfolio
 
-**Personal portfolio of Mohamed Kabba** - showcasing backend development expertise, distributed systems, and scalable API architecture for Summer 2026 internship applications.
+**Personal portfolio of Mohamed Kabba** - showcasing full-stack product development, distributed systems, and scalable application architecture.
 
 ![Portfolio Preview](https://img.shields.io/badge/Status-Production%20Ready-brightgreen)
 ![File Size](https://img.shields.io/badge/Size-133KB-blue)
-![Technologies](https://img.shields.io/badge/Tech-100%25%20Backend-purple)
+![Technologies](https://img.shields.io/badge/Tech-Full--Stack-purple)
 
 > **Note:** This is my personal portfolio, publicly available for employers and educational purposes. This is not a template for public use.
 
@@ -12,10 +12,10 @@
 
 ## 🎯 Overview
 
-This is my fully optimized, single-page portfolio designed to showcase **backend development skills** for Summer 2026 software engineering internship opportunities. Built with pure HTML, CSS, and vanilla JavaScript, it demonstrates technical expertise in distributed systems, microservices, and high-performance API development.
+This is my fully optimized, single-page portfolio designed to showcase **full-stack development skills**. Built with pure HTML, CSS, and vanilla JavaScript, it demonstrates expertise across responsive interfaces, browser applications, distributed systems, microservices, and high-performance APIs.
 
 **Key Features:**
-- 🚀 **100% Backend Focus** - Zero frontend frameworks, pure backend technologies
+- 🚀 **Full-Stack Focus** - Product thinking across interfaces, APIs, and infrastructure
 - ⚡ **High Performance** - 133KB total size, optimized assets, fast load times
 - 📱 **Fully Responsive** - Perfect on desktop, tablet, and mobile
 - ♿ **Accessible** - WCAG 2.1 AA compliant, semantic HTML, ARIA labels
@@ -31,6 +31,11 @@ This is my fully optimized, single-page portfolio designed to showcase **backend
 - **Node.js** (Express, NestJS)
 - **Java** (Spring Boot, Hibernate)
 - **Go** (Gin, Echo)
+
+### Frontend & Product
+- **HTML, CSS, and JavaScript** (responsive interfaces and browser applications)
+- **WebExtensions API** (cross-browser extension development)
+- **Accessibility** (semantic HTML, keyboard navigation, ARIA)
 
 ### Databases & Caching
 - **PostgreSQL** (primary relational database)
@@ -88,31 +93,29 @@ AI-powered learning platform using **RAG (Retrieval-Augmented Generation)** for 
 
 ---
 
-### 3. Collaborative Hub
-**Tech:** Node.js, Socket.io, Express, Redis, PostgreSQL
+### 3. TabSnapshot
+**Tech:** JavaScript, WebExtensions API, Manifest V3, CSS, Local Storage
 
-Real-time Kanban board supporting **200+ concurrent users** with WebSocket communication.
+Privacy-first browser extension for capturing and restoring complete browser workspaces in one click.
 
 **Key Features:**
-- Conflict-free simultaneous editing
-- Live presence indicators
-- Sub-100ms latency
-- Redis-backed session management
+- Named snapshots and partial restore
+- Search, archive, and inline rename
+- Scheduled daily backups
+- Cross-browser WebExtensions support
 
 ---
 
-### 4. Distributed Task Queue System
-**Tech:** Python, RabbitMQ, Redis, PostgreSQL, Docker, Celery
+### 4. LinkSnip — Modern URL Shortener
+**Tech:** HTML, CSS, JavaScript, Spring Boot, PostgreSQL, Redis, RabbitMQ
 
-Horizontally scalable task queue handling **10,000+ jobs per minute**.
+Full-stack URL shortener prototype with custom aliases, expiry rules, QR codes, analytics, and live monitoring.
 
 **Key Features:**
-- Priority queuing
-- Exponential backoff retry logic
-- Dead letter queues for failed jobs
-- Worker pool management
-- 99.9% job completion rate
-- Sub-second latency for high-priority tasks
+- Base62 short codes and custom slugs
+- Simulated Redis caching and rate limiting
+- Click analytics, event feed, and charts
+- Production architecture mapped to a zero-setup browser experience
 
 ---
 
@@ -170,10 +173,10 @@ Real-time data processing pipeline handling **35,000+ events per second**.
 
 ## 📋 Sections
 
-1. **Hero** - Backend developer introduction with status indicator
-2. **Tech Marquee** - Infinite scrolling backend technologies
+1. **Hero** - Full-stack developer introduction with status indicator
+2. **Tech Marquee** - Infinite scrolling technologies
 3. **About** - Background, expertise, and interests
-4. **Projects** - 4 detailed backend project showcases
+4. **Projects** - 6 detailed full-stack project showcases
 5. **Skills** - Animated skill bars and categorized tools
 6. **Contact** - Form with social links and resume download
 
@@ -546,7 +549,7 @@ Please do not copy, redistribute, or use this portfolio for your own purposes.
 - ✅ Added 4 backend project showcases
 - ✅ Simplified logo to "MDK"
 - ✅ Added resume download button
-- ✅ 100% backend-focused tech stack
+- ✅ Full-stack product-focused tech stack
 - ✅ Optimized to 133KB
 - ✅ Mobile responsive with 44px touch targets
 - ✅ WCAG 2.1 AA accessible
@@ -566,8 +569,8 @@ Please do not copy, redistribute, or use this portfolio for your own purposes.
 - **Architecture:** Separated concerns (HTML/CSS/JS)
 - **CSS Variables:** 30+
 - **JavaScript Modules:** 6 IIFEs
-- **Projects Showcased:** 6 backend systems
-- **Technologies Listed:** 20+ backend technologies
+- **Projects Showcased:** 6 full-stack projects
+- **Technologies Listed:** 20+ full-stack technologies
 - **Load Time:** <200ms
 - **Mobile Optimized:** ✅
 - **Accessibility:** WCAG 2.1 AA
