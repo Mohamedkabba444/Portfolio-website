@@ -1,490 +1,3782 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mohamed Kabba — Software Engineering Student</title>
-  <meta name="description" content="Portfolio of Mohamed Kabba, a software engineering student at the University of the Potomac building backend skills with Python and FastAPI, and learning AWS. Seeking a Summer 2027 software engineering internship.">
-  <meta name="color-scheme" content="dark">
-  <link rel="stylesheet" href="styles.css">
-  <script src="index.js" defer></script>
-</head>
-<body>
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-  <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Viewport must be declared before any scripts execute -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--
+    Animation detection — runs before the stylesheet is parsed.
+    Adds `js-io-ready` to <html> only when:
+      • JavaScript is available
+      • prefers-reduced-motion is NOT active (OS animations ON)
+      • IntersectionObserver is supported
+    All "start-invisible" CSS is scoped under this class,
+    so without it every element is visible immediately.
+    This is the progressive-enhancement pattern — content
+    is ALWAYS visible; animations are a pure enhancement.
+  -->
+    <script>
+      /*
+       * Animation gating — runs before the stylesheet.
+       * Adds `js-io-ready` to <html> if IntersectionObserver is
+       * available. This is the ONLY thing needed to gate scroll-reveal
+       * animations; prefers-reduced-motion is handled natively by the
+       * @media (prefers-reduced-motion: no-preference) CSS rule.
+       * Hero entrance animations require NO JS class — they are pure CSS.
+       */
+      if ("IntersectionObserver" in window) {
+        document.documentElement.classList.add("js-io-ready");
+      }
+    </script>
 
-  <header class="site-header">
-    <div class="container site-header__inner">
-      <a class="brand" href="#home" aria-label="Mohamed Kabba — back to top">
-        <span class="brand__mark" aria-hidden="true">MK</span>
-        <span class="brand__name">Mohamed Kabba</span>
+    <!-- Primary meta -->
+    <title>Mohamed Kabba — Full-Stack Developer</title>
+    <meta
+      name="description"
+      content="Mohamed Kabba (MDK) — Full-Stack Developer building polished products, scalable APIs, and cloud-ready systems."
+    />
+    <meta name="theme-color" content="#000000" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Mohamed Kabba — Full-Stack Developer" />
+    <meta
+      property="og:description"
+      content="Building polished full-stack products and scalable systems that power modern applications."
+    />
+    <meta property="og:type" content="website" />
+
+    <!--
+    Fonts:
+    · Syne        — display / headlines  (angular, premium, distinctive)
+    · DM Sans     — body copy            (clean, modern, legible)
+    · JetBrains Mono — code / mono accents (technical aesthetic)
+    
+    Using display=swap so text renders immediately in fallback fonts,
+    then swaps to web fonts when loaded (prevents invisible text).
+  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- ── Accessibility: skip navigation ── -->
+    <a href="#main-content" class="skip-nav-link">Skip to main content</a>
+
+    <!-- ══════════════════════════════════════════
+       NAVIGATION BAR
+  ══════════════════════════════════════════ -->
+    <header class="site-nav" role="banner">
+      <div class="site-nav__inner">
+        <!-- Logo -->
+        <a
+          href="#home"
+          class="site-nav__logo"
+          aria-label="Mohamed Kabba — back to top"
+        >
+          <!-- MDK Dev Logo - Navigation -->
+          <svg
+            class="site-logo-mark"
+            width="70"
+            height="36"
+            viewBox="0 0 70 36"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <defs>
+              <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color: #3b82f6" />
+                <stop offset="100%" style="stop-color: #8b5cf6" />
+              </linearGradient>
+            </defs>
+            <text
+              x="5"
+              y="26"
+              font-family="'Inter', 'Segoe UI', system-ui, sans-serif"
+              font-size="24"
+              font-weight="800"
+              letter-spacing="-1.5"
+              fill="url(#logo-grad)"
+            >
+              MDK
+            </text>
+          </svg>
+        </a>
+
+        <!-- Desktop navigation links -->
+        <nav aria-label="Primary navigation">
+          <ul class="site-nav__links" role="list">
+            <li>
+              <a href="#about" class="site-nav__link" data-section="about"
+                >About</a
+              >
+            </li>
+            <li>
+              <a href="#projects" class="site-nav__link" data-section="projects"
+                >Projects</a
+              >
+            </li>
+            <li>
+              <a href="#skills" class="site-nav__link" data-section="skills"
+                >Skills</a
+              >
+            </li>
+            <li>
+              <a href="#contact" class="site-nav__link" data-section="contact"
+                >Contact</a
+              >
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Right-side actions -->
+        <div class="site-nav__actions">
+          <!-- GitHub icon button -->
+<a
+                href="https://github.com/Mohamedkabba444"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact-social-link"
+                aria-label="GitHub profile"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"
+                  />
+                </svg>
+                GitHub
+              </a>
+
+          <!-- Get in touch CTA -->
+          <a href="#contact" class="btn btn--primary btn--sm site-nav__cta"
+            >Get in touch</a
+          >
+
+          <!-- Hamburger — mobile only, shown via CSS media query -->
+          <button
+            class="site-nav__hamburger"
+            id="hamburger-btn"
+            aria-expanded="false"
+            aria-controls="mobile-menu-panel"
+            aria-label="Open navigation menu"
+          >
+            <span class="site-nav__hamburger-bar" aria-hidden="true"></span>
+            <span class="site-nav__hamburger-bar" aria-hidden="true"></span>
+            <span class="site-nav__hamburger-bar" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile slide-down menu -->
+    <nav
+      class="mobile-menu"
+      id="mobile-menu-panel"
+      aria-hidden="true"
+      aria-label="Mobile navigation menu"
+    >
+      <ul class="mobile-menu__links" role="list">
+        <li>
+          <a href="#about" class="mobile-menu__link" data-section="about"
+            >About</a
+          >
+        </li>
+        <li>
+          <a href="#projects" class="mobile-menu__link" data-section="projects"
+            >Projects</a
+          >
+        </li>
+        <li>
+          <a href="#skills" class="mobile-menu__link" data-section="skills"
+            >Skills</a
+          >
+        </li>
+        <li>
+          <a href="#contact" class="mobile-menu__link" data-section="contact"
+            >Contact</a
+          >
+        </li>
+      </ul>
+      <a
+        href="#contact"
+        class="btn btn--primary"
+        style="width: 100%; justify-content: center"
+      >
+        Get in touch
       </a>
+    </nav>
 
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
-        <span class="nav-toggle__bar" aria-hidden="true"></span>
-        <span class="nav-toggle__bar" aria-hidden="true"></span>
-        <span class="nav-toggle__bar" aria-hidden="true"></span>
-      </button>
+    <!-- ══════════════════════════════════════════
+       MAIN CONTENT
+  ══════════════════════════════════════════ -->
+    <main id="main-content">
+      <!-- ── HERO ─────────────────────────────── -->
+      <section class="hero" id="home" aria-labelledby="hero-headline">
+        <!-- Decorative background glow layers (aria-hidden — purely visual) -->
+        <div class="hero__glow-top" aria-hidden="true"></div>
+        <div class="hero__glow-left" aria-hidden="true"></div>
+        <div class="hero__glow-right" aria-hidden="true"></div>
+        <div class="hero__beam" aria-hidden="true"></div>
 
-      <nav class="site-nav" id="site-nav" aria-label="Primary">
-        <ul class="site-nav__list">
-          <li><a href="#about">About</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#building">Building now</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#learning">Learning now</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <main id="main-content">
-    <!-- Hero -->
-    <section class="hero" id="home" aria-labelledby="hero-heading">
-      <div class="hero__glow hero__glow--teal" aria-hidden="true"></div>
-      <div class="hero__glow hero__glow--blue" aria-hidden="true"></div>
-      <div class="container hero__inner">
-        <p class="hero__eyebrow">Software Engineering Student · University of the Potomac</p>
-        <h1 id="hero-heading">Mohamed <span class="gradient-text">Kabba</span></h1>
-        <p class="hero__role">Backend with Python &amp; FastAPI · Learning AWS</p>
-        <p class="hero__summary">
-          I&rsquo;m a computer science student in Washington, DC, learning backend
-          engineering by building real things: a browser extension people can
-          install, a URL shortener, a FastAPI task manager, and hands-on AWS
-          projects. I&rsquo;m looking for a Summer 2027 software engineering
-          internship where I can keep growing.
-        </p>
-        <div class="terminal" role="note" aria-label="Now building: Cloud Task API with FastAPI, PostgreSQL and JWT, deploying to EC2 and RDS">
-          <span class="terminal__prompt" aria-hidden="true">$</span>
-          <span class="terminal__text">now building — Cloud Task API · FastAPI + PostgreSQL + JWT · EC2 / RDS</span>
-          <span class="terminal__cursor" aria-hidden="true"></span>
-        </div>
-        <ul class="hero__status" aria-label="Current status">
-          <li class="status-chip">
-            <span class="status-chip__dot" aria-hidden="true"></span>
-            Seeking a Summer 2027 internship
-          </li>
-          <li class="status-chip">AWS Cloud Practitioner — in progress</li>
-        </ul>
-        <p class="hero__actions">
-          <a class="button button--primary" href="#projects">View my projects
-            <svg class="button__icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
-          <a class="button" href="mailto:kabbamohamed444@gmail.com">Email me</a>
-          <a class="button" href="https://github.com/Mohamedkabba444" rel="noopener">
-            <svg class="button__icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-            GitHub
-          </a>
-        </p>
-      </div>
-    </section>
-
-    <!-- About -->
-    <section class="section" id="about" aria-labelledby="about-heading">
-      <div class="container">
-        <div class="section-head reveal">
-          <p class="section-head__eyebrow">
-            <svg class="section-head__icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            About
-          </p>
-          <h2 id="about-heading">Student, builder, honest about both</h2>
-        </div>
-        <div class="about__grid">
-          <div class="reveal">
-            <p>
-              I&rsquo;m studying software engineering at the University of the
-              Potomac in Washington, DC. I started with Python and fell in love
-              with the backend — APIs, databases, and the cloud services that
-              make software actually run.
-            </p>
-            <p>
-              Right now I&rsquo;m working through a week-by-week backend roadmap:
-              FastAPI, SQL, authentication, testing, Docker, and deploying on
-              AWS. Alongside it I&rsquo;m taking the official AWS Cloud
-              Practitioner Essentials course and practicing on real AWS
-              services, not just reading about them.
-            </p>
-            <p>
-              I&rsquo;m building in public on GitHub, and I care about getting
-              things right — honest work, clean code, and projects I can
-              actually show you running.
-            </p>
+        <div class="hero__inner container">
+          <!-- Live status pill -->
+          <div
+            class="hero__status-pill"
+            role="status"
+            aria-label="Currently building QuantumChat AI"
+          >
+            <span class="hero__status-dot" aria-hidden="true"></span>
+            Building&nbsp;<strong>QuantumChat AI</strong>
           </div>
-          <dl class="facts reveal">
-            <div class="facts__row">
-              <dt>Degree</dt>
-              <dd>B.S. CS / Software Engineering</dd>
-            </div>
-            <div class="facts__row">
-              <dt>School</dt>
-              <dd>University of the Potomac, Washington, DC</dd>
-            </div>
-            <div class="facts__row">
-              <dt>GPA</dt>
-              <dd>3.08 · 78 credits earned</dd>
-            </div>
-            <div class="facts__row">
-              <dt>Based in</dt>
-              <dd>Hyattsville, MD</dd>
-            </div>
-            <div class="facts__row">
-              <dt>Looking for</dt>
-              <dd>Summer 2027 software engineering internship</dd>
-            </div>
-          </dl>
-        </div>
-      </div>
-    </section>
 
-    <!-- Projects: built -->
-    <section class="section section--alt" id="projects" aria-labelledby="projects-heading">
-      <div class="container">
-        <div class="section-head reveal">
-          <p class="section-head__eyebrow">
-            <svg class="section-head__icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
-            Projects
+          <!-- Main headline -->
+          <h1 class="hero__headline" id="hero-headline">
+            Full-Stack<br />
+            <span class="hero__headline-accent">Developer</span><br />
+            &amp; Builder
+          </h1>
+
+          <!-- Description -->
+          <p class="hero__description">
+            I'm <strong>Mohamed Kabba</strong> — I architect and build scalable
+            full-stack products that feel clear on the surface and hold up under
+            real-world scale. From responsive interfaces to resilient APIs, I
+            build the product end to end.
           </p>
-          <h2 id="projects-heading">Built — real, working, on GitHub</h2>
-          <p class="section__intro">
-            These two are finished and public. Everything further down the page
-            is work in progress, labeled as such.
-          </p>
-        </div>
 
-        <div class="project-grid">
-          <article class="card reveal">
-            <div class="card__top">
-              <span class="card__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-              </span>
-              <p class="card__status"><span class="badge badge--done">Built</span></p>
-            </div>
-            <h3 class="card__title">TabSnapshot</h3>
-            <p class="card__text">
-              A privacy-first browser extension that captures and restores
-              complete browser workspaces in one click — named snapshots,
-              partial restore, search, archive, and scheduled backups.
-            </p>
-            <ul class="tag-list" aria-label="Technologies">
-              <li>JavaScript</li>
-              <li>WebExtensions API</li>
-              <li>Manifest V3</li>
-              <li>CSS</li>
-            </ul>
-            <p class="card__links">
-              <a href="https://github.com/Mohamedkabba444/TabSnapshot" rel="noopener">View on GitHub <span aria-hidden="true">&rarr;</span></a>
-            </p>
-          </article>
-
-          <article class="card reveal">
-            <div class="card__top">
-              <span class="card__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>
-              </span>
-              <p class="card__status"><span class="badge badge--done">Built · prototype</span></p>
-            </div>
-            <h3 class="card__title">LinkSnip — Modern URL Shortener</h3>
-            <p class="card__text">
-              A full-stack URL shortener prototype with custom aliases, expiry
-              rules, QR codes, click analytics, and a live monitoring
-              dashboard. It models a production Spring Boot, PostgreSQL,
-              Redis, and RabbitMQ architecture in a zero-setup browser
-              experience.
-            </p>
-            <ul class="tag-list" aria-label="Technologies">
-              <li>HTML</li>
-              <li>CSS</li>
-              <li>JavaScript</li>
-              <li>Spring Boot</li>
-              <li>PostgreSQL</li>
-              <li>Redis</li>
-            </ul>
-            <p class="card__links">
-              <a href="https://github.com/Mohamedkabba444/LinkSnip-Modern-URL-Shortener" rel="noopener">View on GitHub <span aria-hidden="true">&rarr;</span></a>
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- Building now -->
-    <section class="section section--building" id="building" aria-labelledby="building-heading">
-      <div class="container">
-        <div class="section-head reveal">
-          <p class="section-head__eyebrow">
-            <svg class="section-head__icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
-            Building now
-          </p>
-          <h2 id="building-heading">The roadmap, in progress</h2>
-          <p class="section__intro">
-            These are the projects from my plan — a cloud-deployed API, a
-            serverless app, a secure file platform, and my first open-source
-            contribution. Each one is being built step by step, and the badges
-            say so honestly: <strong>in progress</strong> means not finished yet.
-          </p>
-        </div>
-
-        <div class="project-grid">
-          <article class="card card--building reveal">
-            <div class="card__top">
-              <span class="card__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 12l2 2 4-4"/></svg>
-              </span>
-              <p class="card__status"><span class="badge">In progress</span></p>
-            </div>
-            <h3 class="card__title">Cloud-Deployed Task &amp; Team Workflow API</h3>
-            <p class="card__text">
-              A multi-user task management API with full CRUD, task status and
-              priority, due dates, and per-user ownership — each user only
-              sees their own tasks. JWT registration and login with hashed
-              passwords and correct HTTP status codes (201 on creation, 404
-              for missing resources, 401 when unauthorized). Deploying to AWS
-              on EC2 behind security groups, with data in a managed
-              PostgreSQL database (RDS).
-            </p>
-            <ul class="tag-list" aria-label="Technologies">
-              <li>Python</li>
-              <li>FastAPI</li>
-              <li>PostgreSQL</li>
-              <li>JWT</li>
-              <li>Docker</li>
-              <li>AWS EC2</li>
-              <li>RDS</li>
-            </ul>
-            <p class="card__links">
-              <a href="https://github.com/Mohamedkabba444?tab=repositories" rel="noopener">Follow progress on GitHub <span aria-hidden="true">&rarr;</span></a>
-            </p>
-          </article>
-
-          <article class="card card--building reveal">
-            <div class="card__top">
-              <span class="card__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-              </span>
-              <p class="card__status"><span class="badge">In progress</span></p>
-            </div>
-            <h3 class="card__title">Serverless Internship Application Tracker</h3>
-            <p class="card__text">
-              A serverless web app to track internship applications — company,
-              role, deadline, status, and notes — in one searchable
-              dashboard. API Gateway routes to Python Lambda functions, data
-              lives in DynamoDB, and the front end is hosted on S3 and
-              delivered through CloudFront, with least-privilege IAM roles
-              for each function.
-            </p>
-            <ul class="tag-list" aria-label="Technologies">
-              <li>Python</li>
-              <li>AWS Lambda</li>
-              <li>API Gateway</li>
-              <li>DynamoDB</li>
-              <li>S3</li>
-              <li>CloudFront</li>
-            </ul>
-            <p class="card__links">
-              <a href="https://github.com/Mohamedkabba444?tab=repositories" rel="noopener">Follow progress on GitHub <span aria-hidden="true">&rarr;</span></a>
-            </p>
-          </article>
-
-          <article class="card card--building reveal">
-            <div class="card__top">
-              <span class="card__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/><path d="M12 12v6"/><path d="M9.5 15.5L12 13l2.5 2.5"/></svg>
-              </span>
-              <p class="card__status"><span class="badge">In progress</span></p>
-            </div>
-            <h3 class="card__title">Secure Personal File-Sharing &amp; Portfolio Platform</h3>
-            <p class="card__text">
-              A secure file-sharing and portfolio site on S3 with CloudFront
-              delivery — organized folders and shareable download links that
-              don&rsquo;t expose the underlying bucket. Private by default with
-              public access blocked, IAM and bucket policies, pre-signed URLs
-              generated with Python and boto3 for time-limited sharing, and
-              automated uploads and cache invalidation.
-            </p>
-            <ul class="tag-list" aria-label="Technologies">
-              <li>AWS S3</li>
-              <li>CloudFront</li>
-              <li>IAM</li>
-              <li>Python</li>
-              <li>boto3</li>
-              <li>HTML / CSS</li>
-            </ul>
-            <p class="card__links">
-              <a href="https://github.com/Mohamedkabba444?tab=repositories" rel="noopener">Follow progress on GitHub <span aria-hidden="true">&rarr;</span></a>
-            </p>
-          </article>
-
-          <article class="card card--building reveal">
-            <div class="card__top">
-              <span class="card__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>
-              </span>
-              <p class="card__status"><span class="badge">In progress</span></p>
-            </div>
-            <h3 class="card__title">Open Source Contributor — FastAPI</h3>
-            <p class="card__text">
-              Contributing to the FastAPI project itself: improving
-              documentation and examples, reproducing reported issues with
-              minimal test cases, and writing pytest tests. The goal is a
-              first merged pull request — the real bar for calling this one
-              done.
-            </p>
-            <ul class="tag-list" aria-label="Technologies">
-              <li>Python</li>
-              <li>FastAPI</li>
-              <li>pytest</li>
-              <li>GitHub</li>
-            </ul>
-            <p class="card__links">
-              <a href="https://github.com/fastapi/fastapi" rel="noopener">FastAPI on GitHub <span aria-hidden="true">&rarr;</span></a>
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- Skills -->
-    <section class="section" id="skills" aria-labelledby="skills-heading">
-      <div class="container">
-        <div class="section-head reveal">
-          <p class="section-head__eyebrow">
-            <svg class="section-head__icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-            Skills
-          </p>
-          <h2 id="skills-heading">The stack I build with</h2>
-          <p class="section__intro">
-            What I actually use — with honest labels. &ldquo;Learning&rdquo; means
-            I&rsquo;m using it now and still growing; &ldquo;coursework&rdquo; means
-            I&rsquo;ve studied and used it in class.
-          </p>
-        </div>
-        <div class="skill-grid">
-          <div class="skill-group reveal">
-            <h3>
-              <svg class="skill-group__icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-              Languages
-            </h3>
-            <ul>
-              <li>Python</li>
-              <li>JavaScript</li>
-              <li>HTML &amp; CSS</li>
-              <li>Java <span class="skill-note">coursework</span></li>
-              <li>SQL <span class="skill-note">coursework</span></li>
-            </ul>
-          </div>
-          <div class="skill-group reveal">
-            <h3>
-              <svg class="skill-group__icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
-              Backend &amp; APIs
-            </h3>
-            <ul>
-              <li>FastAPI <span class="skill-note">learning</span></li>
-              <li>REST APIs <span class="skill-note">learning</span></li>
-              <li>WebExtensions API</li>
-              <li>Spring Boot <span class="skill-note">coursework</span></li>
-            </ul>
-          </div>
-          <div class="skill-group reveal">
-            <h3>
-              <svg class="skill-group__icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
-              Tools &amp; cloud
-            </h3>
-            <ul>
-              <li>Git &amp; GitHub</li>
-              <li>AWS <span class="skill-note">in progress — EC2, Lambda, SQS, CloudWatch</span></li>
-              <li>Linux &amp; command line <span class="skill-note">learning</span></li>
-              <li>nginx</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Learning now -->
-    <section class="section section--alt" id="learning" aria-labelledby="learning-heading">
-      <div class="container">
-        <div class="section-head reveal">
-          <p class="section-head__eyebrow">
-            <svg class="section-head__icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
-            Learning now
-          </p>
-          <h2 id="learning-heading">What I&rsquo;m working on this week</h2>
-        </div>
-        <ol class="learning-list">
-          <li class="reveal">
-            <strong>AWS Cloud Practitioner Essentials</strong> — Modules 1–3
-            complete, with hands-on practice on EC2, Lambda, SQS, and
-            CloudWatch. Exam goal: AWS Certified Cloud Practitioner
-            (not yet earned).
-          </li>
-          <li class="reveal">
-            <strong>Backend roadmap</strong> — Task API in FastAPI, then
-            PostgreSQL, JWT authentication, pytest, Docker, and deployment
-            on AWS.
-          </li>
-          <li class="reveal">
-            <strong>Open source</strong> — working toward a first merged
-            pull request in the FastAPI project (documentation, examples,
-            and tests).
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section class="section" id="contact" aria-labelledby="contact-heading">
-      <div class="container">
-        <div class="section-head reveal">
-          <p class="section-head__eyebrow">
-            <svg class="section-head__icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            Contact
-          </p>
-          <h2 id="contact-heading">Let&rsquo;s talk</h2>
-          <p class="section__intro">
-            I&rsquo;m looking for a Summer 2027 software engineering internship.
-            The fastest way to reach me is email.
-          </p>
-        </div>
-        <ul class="contact-list">
-          <li class="reveal">
-            <a href="mailto:kabbamohamed444@gmail.com">
-              <svg class="contact-list__icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-              <span class="contact-list__label">Email</span>
-              <span>kabbamohamed444@gmail.com</span>
+          <!-- CTAs -->
+          <div class="hero__actions">
+            <a href="#projects" class="btn btn--primary">
+              View projects
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
             </a>
-          </li>
-          <li class="reveal">
-            <a href="https://github.com/Mohamedkabba444" rel="noopener">
-              <svg class="contact-list__icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-              <span class="contact-list__label">GitHub</span>
-              <span>github.com/Mohamedkabba444</span>
+            <a href="#contact" class="btn btn--ghost">Get in touch</a>
+            <a
+              href="https://github.com/Mohamedkabba444"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn--ghost"
+              aria-label="Visit GitHub profile"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path
+                  d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"
+                />
+              </svg>
+              GitHub
             </a>
-          </li>
-          <li class="reveal">
-            <a href="https://www.linkedin.com/in/mohamed-kabba-2a804631b" rel="noopener">
-              <svg class="contact-list__icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-              <span class="contact-list__label">LinkedIn</span>
-              <span>linkedin.com/in/mohamed-kabba-2a804631b</span>
-            </a>
-          </li>
-        </ul>
+          </div>
+        </div>
+
+        <!-- Scroll cue — purely decorative -->
+        <div class="hero__scroll-cue" aria-hidden="true">
+          <div class="hero__scroll-arrow"></div>
+        </div>
+      </section>
+
+      <!-- ── TECH MARQUEE ──────────────────────── -->
+      <div
+        class="tech-marquee"
+        role="region"
+        aria-label="Technologies I work with"
+      >
+        <div class="tech-marquee__track" aria-hidden="true">
+          <!-- Each set is duplicated — the animation loops by sliding one full set width -->
+          <span class="tech-marquee__item">Python</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">HTML</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">CSS</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">JavaScript</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">TypeScript</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">Node.js</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">Java</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">Go</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">PostgreSQL</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">MongoDB</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">Redis</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">RabbitMQ</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">Kafka</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">WebSockets</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">Docker</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">Kubernetes</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">AWS</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">Microservices</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">REST APIs</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">GraphQL</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">gRPC</span
+          ><span class="tech-marquee__separator"></span>
+          <!-- Duplicate for seamless loop -->
+          <span class="tech-marquee__item">Python</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">HTML</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">CSS</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">JavaScript</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">TypeScript</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">Node.js</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">Java</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">Go</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">PostgreSQL</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">MongoDB</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">Redis</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">RabbitMQ</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">Kafka</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">WebSockets</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">Docker</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">Kubernetes</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">AWS</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">Microservices</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">REST APIs</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">GraphQL</span
+          ><span class="tech-marquee__separator"></span>
+          <span class="tech-marquee__item">gRPC</span
+          ><span class="tech-marquee__separator"></span>
+        </div>
       </div>
-    </section>
-  </main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <p>&copy; <span id="year">2026</span> Mohamed Kabba · Hyattsville, MD</p>
-      <p class="site-footer__note">
-        Built with plain HTML, CSS, and a little JavaScript. No frameworks,
-        no tracking, no external scripts.
-      </p>
-    </div>
-  </footer>
+      <!-- ── ABOUT ─────────────────────────────── -->
+      <section class="page-section" id="about" aria-labelledby="about-headline">
+        <div class="container">
+          <div class="about-grid reveal-stagger">
+            <!-- Avatar with floating stat cards -->
+            <div class="about-avatar-col">
+              <div class="about-avatar-wrap">
+                <div
+                  class="about-avatar"
+                  role="img"
+                  aria-label="Avatar showing initials MDK"
+                >
+                  MDK
+                </div>
+                <!-- Stat chips -->
+                <div class="stat-chip stat-chip--top-right" aria-hidden="true">
+                  <div class="stat-chip__value">3+</div>
+                  <div class="stat-chip__label">Years exp.</div>
+                </div>
+                <div
+                  class="stat-chip stat-chip--bottom-left"
+                  aria-hidden="true"
+                >
+                  <div class="stat-chip__value">10+</div>
+                  <div class="stat-chip__label">Projects shipped</div>
+                </div>
+              </div>
+            </div>
 
-  <a class="back-to-top" href="#home" id="back-to-top" aria-label="Back to top" hidden>
-    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
-  </a>
-</body>
+            <!-- Bio copy -->
+            <div class="about-text">
+              <p class="eyebrow">About me</p>
+              <h2 class="section-headline" id="about-headline">
+                Turning complex problems<br />into elegant code
+              </h2>
+              <p>
+                I'm a <strong>Full-Stack Developer</strong> and Computer Science
+                student at <strong>University of the Potomac</strong>,
+                specializing in Software Engineering. While pursuing my degree,
+                I build real-world, production-ready applications — from
+                thoughtful browser experiences to distributed services, I bring
+                product, interface, and infrastructure together.
+              </p>
+              <p>
+                Currently focused on <strong>full-stack architecture</strong>,
+                distributed systems, and cloud-native infrastructure. I thrive
+                at the intersection of product design, system performance, and
+                reliable engineering.
+              </p>
+
+              <!-- Interest tags -->
+              <div class="interest-tag-list" aria-label="Areas of interest">
+                <span class="interest-tag">Distributed Systems</span>
+                <span class="interest-tag">Microservices</span>
+                <span class="interest-tag">System Design</span>
+                <span class="interest-tag">API Architecture</span>
+                <span class="interest-tag">Database Optimization</span>
+                <span class="interest-tag">Message Queues</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr class="section-divider" />
+
+      <!-- ── PROJECTS ──────────────────────────── -->
+      <section
+        class="page-section"
+        id="projects"
+        aria-labelledby="projects-headline"
+      >
+        <div class="container">
+          <!-- Section header row -->
+          <div class="projects-section-header reveal">
+            <div>
+              <p class="eyebrow">Selected work</p>
+              <h2 class="section-headline" id="projects-headline">
+                Projects I've built
+              </h2>
+              <p class="projects-section-intro">
+                A few systems I've designed, shipped, and learned from.
+              </p>
+            </div>
+            <a
+              href="https://github.com/Mohamedkabba444?tab=repositories"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn--ghost"
+              aria-label="See all projects on GitHub"
+            >
+              All on GitHub
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M7 17L17 7M17 7H7M17 7v10" />
+              </svg>
+            </a>
+          </div>
+
+          <!-- 2×2 grid of project cards -->
+          <div class="projects-grid reveal-stagger">
+            <!-- ─ Project 1: Nexus - AI Knowledge Base API ─ -->
+            <article
+              class="project-card"
+              aria-label="Nexus AI Knowledge Base API"
+            >
+              <div class="project-card__visual" aria-hidden="true">
+                <svg
+                  viewBox="0 0 560 196"
+                  xmlns="http://www.w3.org/2000/svg"
+                  preserveAspectRatio="xMidYMid slice"
+                >
+                  <rect width="560" height="196" fill="#0d0d0d" />
+                  <defs>
+                    <pattern
+                      id="grid-nexus"
+                      width="28"
+                      height="28"
+                      patternUnits="userSpaceOnUse"
+                    >
+                      <path
+                        d="M28 0L0 0 0 28"
+                        fill="none"
+                        stroke="rgba(139,92,246,0.05)"
+                        stroke-width="0.5"
+                      />
+                    </pattern>
+                  </defs>
+                  <rect width="560" height="196" fill="url(#grid-nexus)" />
+                  <ellipse
+                    cx="280"
+                    cy="98"
+                    rx="260"
+                    ry="110"
+                    fill="rgba(139,92,246,0.04)"
+                  />
+
+                  <!-- Central knowledge graph node -->
+                  <circle
+                    cx="280"
+                    cy="98"
+                    r="32"
+                    fill="rgba(139,92,246,0.15)"
+                    stroke="rgba(139,92,246,0.6)"
+                    stroke-width="2"
+                  />
+                  <text
+                    x="280"
+                    y="94"
+                    font-family="monospace"
+                    font-size="9"
+                    fill="rgba(139,92,246,0.95)"
+                    text-anchor="middle"
+                    font-weight="600"
+                  >
+                    NEXUS
+                  </text>
+                  <text
+                    x="280"
+                    y="106"
+                    font-family="monospace"
+                    font-size="7"
+                    fill="rgba(255,255,255,0.35)"
+                    text-anchor="middle"
+                  >
+                    Knowledge API
+                  </text>
+
+                  <!-- Vector database connections -->
+                  <g opacity="0.8">
+                    <!-- Top left node -->
+                    <line
+                      x1="280"
+                      y1="98"
+                      x2="160"
+                      y2="50"
+                      stroke="rgba(139,92,246,0.3)"
+                      stroke-width="1.5"
+                      stroke-dasharray="4,4"
+                    />
+                    <circle
+                      cx="160"
+                      cy="50"
+                      r="18"
+                      fill="rgba(59,130,246,0.15)"
+                      stroke="rgba(59,130,246,0.5)"
+                      stroke-width="1.5"
+                    />
+                    <text
+                      x="160"
+                      y="54"
+                      font-family="monospace"
+                      font-size="7"
+                      fill="rgba(59,130,246,0.9)"
+                      text-anchor="middle"
+                      font-weight="600"
+                    >
+                      pgvector
+                    </text>
+
+                    <!-- Top right node -->
+                    <line
+                      x1="280"
+                      y1="98"
+                      x2="400"
+                      y2="50"
+                      stroke="rgba(139,92,246,0.3)"
+                      stroke-width="1.5"
+                      stroke-dasharray="4,4"
+                    />
+                    <circle
+                      cx="400"
+                      cy="50"
+                      r="18"
+                      fill="rgba(34,197,94,0.15)"
+                      stroke="rgba(34,197,94,0.5)"
+                      stroke-width="1.5"
+                    />
+                    <text
+                      x="400"
+                      y="54"
+                      font-family="monospace"
+                      font-size="7"
+                      fill="rgba(34,197,94,0.9)"
+                      text-anchor="middle"
+                      font-weight="600"
+                    >
+                      Redis
+                    </text>
+
+                    <!-- Bottom left node -->
+                    <line
+                      x1="280"
+                      y1="98"
+                      x2="160"
+                      y2="146"
+                      stroke="rgba(139,92,246,0.3)"
+                      stroke-width="1.5"
+                      stroke-dasharray="4,4"
+                    />
+                    <circle
+                      cx="160"
+                      cy="146"
+                      r="18"
+                      fill="rgba(251,146,60,0.15)"
+                      stroke="rgba(251,146,60,0.5)"
+                      stroke-width="1.5"
+                    />
+                    <text
+                      x="160"
+                      y="150"
+                      font-family="monospace"
+                      font-size="7"
+                      fill="rgba(251,146,60,0.9)"
+                      text-anchor="middle"
+                      font-weight="600"
+                    >
+                      FastAPI
+                    </text>
+
+                    <!-- Bottom right node -->
+                    <line
+                      x1="280"
+                      y1="98"
+                      x2="400"
+                      y2="146"
+                      stroke="rgba(139,92,246,0.3)"
+                      stroke-width="1.5"
+                      stroke-dasharray="4,4"
+                    />
+                    <circle
+                      cx="400"
+                      cy="146"
+                      r="18"
+                      fill="rgba(236,72,153,0.15)"
+                      stroke="rgba(236,72,153,0.5)"
+                      stroke-width="1.5"
+                    />
+                    <text
+                      x="400"
+                      y="150"
+                      font-family="monospace"
+                      font-size="7"
+                      fill="rgba(236,72,153,0.9)"
+                      text-anchor="middle"
+                      font-weight="600"
+                    >
+                      OpenAI
+                    </text>
+                  </g>
+
+                  <!-- API metrics panel -->
+                  <rect
+                    x="22"
+                    y="22"
+                    width="140"
+                    height="152"
+                    rx="8"
+                    fill="#111"
+                    stroke="rgba(255,255,255,0.07)"
+                    stroke-width="1"
+                  />
+                  <text
+                    x="92"
+                    y="40"
+                    font-family="monospace"
+                    font-size="7.5"
+                    fill="rgba(255,255,255,0.28)"
+                    text-anchor="middle"
+                    letter-spacing="0.5"
+                  >
+                    API METRICS
+                  </text>
+
+                  <text
+                    x="38"
+                    y="68"
+                    font-family="monospace"
+                    font-size="9"
+                    fill="rgba(255,255,255,0.75)"
+                    font-weight="600"
+                  >
+                    1.2M
+                  </text>
+                  <text
+                    x="38"
+                    y="80"
+                    font-family="monospace"
+                    font-size="6.5"
+                    fill="rgba(255,255,255,0.28)"
+                  >
+                    Queries/day
+                  </text>
+
+                  <text
+                    x="38"
+                    y="106"
+                    font-family="monospace"
+                    font-size="9"
+                    fill="#4ade80"
+                    font-weight="600"
+                  >
+                    95%
+                  </text>
+                  <text
+                    x="38"
+                    y="118"
+                    font-family="monospace"
+                    font-size="6.5"
+                    fill="rgba(255,255,255,0.28)"
+                  >
+                    Cache hit rate
+                  </text>
+
+                  <text
+                    x="38"
+                    y="144"
+                    font-family="monospace"
+                    font-size="9"
+                    fill="#60a5fa"
+                    font-weight="600"
+                  >
+                    120ms
+                  </text>
+                  <text
+                    x="38"
+                    y="156"
+                    font-family="monospace"
+                    font-size="6.5"
+                    fill="rgba(255,255,255,0.28)"
+                  >
+                    Avg response
+                  </text>
+
+                  <!-- Vector search results panel -->
+                  <rect
+                    x="398"
+                    y="22"
+                    width="140"
+                    height="152"
+                    rx="8"
+                    fill="#111"
+                    stroke="rgba(255,255,255,0.07)"
+                    stroke-width="1"
+                  />
+                  <text
+                    x="468"
+                    y="40"
+                    font-family="monospace"
+                    font-size="7.5"
+                    fill="rgba(255,255,255,0.28)"
+                    text-anchor="middle"
+                    letter-spacing="0.5"
+                  >
+                    SEARCH RESULTS
+                  </text>
+
+                  <rect
+                    x="410"
+                    y="50"
+                    width="116"
+                    height="32"
+                    rx="4"
+                    fill="rgba(139,92,246,0.08)"
+                    stroke="rgba(139,92,246,0.2)"
+                    stroke-width="1"
+                  />
+                  <text
+                    x="418"
+                    y="63"
+                    font-family="monospace"
+                    font-size="7"
+                    fill="rgba(139,92,246,0.85)"
+                    font-weight="600"
+                  >
+                    Doc #1247
+                  </text>
+                  <text
+                    x="418"
+                    y="75"
+                    font-family="monospace"
+                    font-size="6.5"
+                    fill="rgba(255,255,255,0.35)"
+                  >
+                    Similarity: 0.94
+                  </text>
+
+                  <rect
+                    x="410"
+                    y="90"
+                    width="116"
+                    height="32"
+                    rx="4"
+                    fill="rgba(59,130,246,0.08)"
+                    stroke="rgba(59,130,246,0.2)"
+                    stroke-width="1"
+                  />
+                  <text
+                    x="418"
+                    y="103"
+                    font-family="monospace"
+                    font-size="7"
+                    fill="rgba(59,130,246,0.85)"
+                    font-weight="600"
+                  >
+                    Doc #892
+                  </text>
+                  <text
+                    x="418"
+                    y="115"
+                    font-family="monospace"
+                    font-size="6.5"
+                    fill="rgba(255,255,255,0.35)"
+                  >
+                    Similarity: 0.89
+                  </text>
+
+                  <rect
+                    x="410"
+                    y="130"
+                    width="116"
+                    height="32"
+                    rx="4"
+                    fill="rgba(34,197,94,0.08)"
+                    stroke="rgba(34,197,94,0.2)"
+                    stroke-width="1"
+                  />
+                  <text
+                    x="418"
+                    y="143"
+                    font-family="monospace"
+                    font-size="7"
+                    fill="rgba(34,197,94,0.85)"
+                    font-weight="600"
+                  >
+                    Doc #3421
+                  </text>
+                  <text
+                    x="418"
+                    y="155"
+                    font-family="monospace"
+                    font-size="6.5"
+                    fill="rgba(255,255,255,0.35)"
+                  >
+                    Similarity: 0.87
+                  </text>
+                </svg>
+              </div>
+              <div class="project-card__body">
+                <div class="project-card__meta">
+                  <span class="project-card__badge">Full-stack / AI</span>
+                  <span class="project-card__year">2026</span>
+                </div>
+                <h3 class="project-card__title">
+                  Nexus — AI Knowledge Base API
+                </h3>
+                <p class="project-card__desc">
+                  Scalable knowledge base API using vector embeddings for
+                  semantic search across 1.2M+ queries daily. 95% cache hit rate
+                  through intelligent Redis caching and 120ms average response
+                  time with pgvector-powered similarity search.
+                </p>
+                <ul class="tech-pill-list" aria-label="Technologies used">
+                  <li class="tech-pill">Python</li>
+                  <li class="tech-pill">FastAPI</li>
+                  <li class="tech-pill">PostgreSQL</li>
+                  <li class="tech-pill">pgvector</li>
+                  <li class="tech-pill">Redis</li>
+                  <li class="tech-pill">OpenAI</li>
+                </ul>
+                <div class="project-card__links">
+                  <a
+                    href="https://github.com/Mohamedkabba444?tab=repositories"
+                    class="project-card__action-link"
+                    aria-label="View source on GitHub"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"
+                      />
+                    </svg>
+                    GitHub
+                  </a>
+                  <span class="project-card__availability">Demo coming soon</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- ─ Project 2: Event Streaming Analytics Pipeline ─ -->
+            <article
+              class="project-card"
+              aria-label="Event Streaming Analytics Pipeline"
+            >
+              <div class="project-card__visual" aria-hidden="true">
+                <svg
+                  viewBox="0 0 560 196"
+                  xmlns="http://www.w3.org/2000/svg"
+                  preserveAspectRatio="xMidYMid slice"
+                >
+                  <rect width="560" height="196" fill="#0d0d0d" />
+                  <defs>
+                    <pattern
+                      id="grid-kafka"
+                      width="28"
+                      height="28"
+                      patternUnits="userSpaceOnUse"
+                    >
+                      <path
+                        d="M28 0L0 0 0 28"
+                        fill="none"
+                        stroke="rgba(34,211,238,0.05)"
+                        stroke-width="0.5"
+                      />
+                    </pattern>
+                  </defs>
+                  <rect width="560" height="196" fill="url(#grid-kafka)" />
+
+                  <!-- Data flow visualization -->
+                  <!-- Producers (left) -->
+                  <rect
+                    x="20"
+                    y="30"
+                    width="110"
+                    height="136"
+                    rx="8"
+                    fill="#111"
+                    stroke="rgba(255,255,255,0.07)"
+                    stroke-width="1"
+                  />
+                  <text
+                    x="75"
+                    y="48"
+                    font-family="monospace"
+                    font-size="7.5"
+                    fill="rgba(255,255,255,0.28)"
+                    text-anchor="middle"
+                    letter-spacing="0.5"
+                  >
+                    PRODUCERS
+                  </text>
+
+                  <rect
+                    x="32"
+                    y="58"
+                    width="86"
+                    height="24"
+                    rx="4"
+                    fill="rgba(34,211,238,0.08)"
+                    stroke="rgba(34,211,238,0.25)"
+                    stroke-width="1"
+                  />
+                  <text
+                    x="40"
+                    y="72"
+                    font-family="monospace"
+                    font-size="7"
+                    fill="rgba(34,211,238,0.85)"
+                    font-weight="600"
+                  >
+                    User Events
+                  </text>
+                  <text
+                    x="40"
+                    y="81"
+                    font-family="monospace"
+                    font-size="6.5"
+                    fill="rgba(255,255,255,0.28)"
+                  >
+                    15k/sec
+                  </text>
+
+                  <rect
+                    x="32"
+                    y="90"
+                    width="86"
+                    height="24"
+                    rx="4"
+                    fill="rgba(139,92,246,0.08)"
+                    stroke="rgba(139,92,246,0.25)"
+                    stroke-width="1"
+                  />
+                  <text
+                    x="40"
+                    y="104"
+                    font-family="monospace"
+                    font-size="7"
+                    fill="rgba(139,92,246,0.85)"
+                    font-weight="600"
+                  >
+                    Clickstream
+                  </text>
+                  <text
+                    x="40"
+                    y="113"
+                    font-family="monospace"
+                    font-size="6.5"
+                    fill="rgba(255,255,255,0.28)"
+                  >
+                    8k/sec
+                  </text>
+
+                  <rect
+                    x="32"
+                    y="122"
+                    width="86"
+                    height="24"
+                    rx="4"
+                    fill="rgba(251,146,60,0.08)"
+                    stroke="rgba(251,146,60,0.25)"
+                    stroke-width="1"
+                  />
+                  <text
+                    x="40"
+                    y="136"
+                    font-family="monospace"
+                    font-size="7"
+                    fill="rgba(251,146,60,0.85)"
+                    font-weight="600"
+                  >
+                    API Metrics
+                  </text>
+                  <text
+                    x="40"
+                    y="145"
+                    font-family="monospace"
+                    font-size="6.5"
+                    fill="rgba(255,255,255,0.28)"
+                  >
+                    12k/sec
+                  </text>
+
+                  <!-- Arrows to Kafka -->
+                  <path
+                    d="M138 70 L170 70"
+                    stroke="rgba(34,211,238,0.4)"
+                    stroke-width="2"
+                    fill="none"
+                    stroke-dasharray="6,3"
+                  />
+                  <path
+                    d="M138 102 L170 102"
+                    stroke="rgba(139,92,246,0.4)"
+                    stroke-width="2"
+                    fill="none"
+                    stroke-dasharray="6,3"
+                  />
+                  <path
+                    d="M138 134 L170 134"
+                    stroke="rgba(251,146,60,0.4)"
+                    stroke-width="2"
+                    fill="none"
+                    stroke-dasharray="6,3"
+                  />
+
+                  <!-- Kafka cluster (center) -->
+                  <rect
+                    x="170"
+                    y="30"
+                    width="220"
+                    height="136"
+                    rx="8"
+                    fill="#111"
+                    stroke="rgba(34,211,238,0.3)"
+                    stroke-width="2"
+                  />
+                  <text
+                    x="280"
+                    y="48"
+                    font-family="monospace"
+                    font-size="8"
+                    fill="rgba(34,211,238,0.9)"
+                    text-anchor="middle"
+                    letter-spacing="0.8"
+                    font-weight="600"
+                  >
+                    APACHE KAFKA
+                  </text>
+
+                  <!-- Kafka topics -->
+                  <g transform="translate(0, 0)">
+                    <rect
+                      x="185"
+                      y="62"
+                      width="63"
+                      height="28"
+                      rx="4"
+                      fill="rgba(34,211,238,0.12)"
+                      stroke="rgba(34,211,238,0.35)"
+                      stroke-width="1"
+                    />
+                    <text
+                      x="216.5"
+                      y="74"
+                      font-family="monospace"
+                      font-size="7"
+                      fill="rgba(34,211,238,0.95)"
+                      text-anchor="middle"
+                      font-weight="600"
+                    >
+                      topic-1
+                    </text>
+                    <text
+                      x="216.5"
+                      y="85"
+                      font-family="monospace"
+                      font-size="6.5"
+                      fill="rgba(255,255,255,0.35)"
+                      text-anchor="middle"
+                    >
+                      3 partitions
+                    </text>
+
+                    <rect
+                      x="258"
+                      y="62"
+                      width="63"
+                      height="28"
+                      rx="4"
+                      fill="rgba(139,92,246,0.12)"
+                      stroke="rgba(139,92,246,0.35)"
+                      stroke-width="1"
+                    />
+                    <text
+                      x="289.5"
+                      y="74"
+                      font-family="monospace"
+                      font-size="7"
+                      fill="rgba(139,92,246,0.95)"
+                      text-anchor="middle"
+                      font-weight="600"
+                    >
+                      topic-2
+                    </text>
+                    <text
+                      x="289.5"
+                      y="85"
+                      font-family="monospace"
+                      font-size="6.5"
+                      fill="rgba(255,255,255,0.35)"
+                      text-anchor="middle"
+                    >
+                      5 partitions
+                    </text>
+
+                    <rect
+                      x="331"
+                      y="62"
+                      width="45"
+                      height="28"
+                      rx="4"
+                      fill="rgba(251,146,60,0.12)"
+                      stroke="rgba(251,146,60,0.35)"
+                      stroke-width="1"
+                    />
+                    <text
+                      x="353.5"
+                      y="74"
+                      font-family="monospace"
+                      font-size="7"
+                      fill="rgba(251,146,60,0.95)"
+                      text-anchor="middle"
+                      font-weight="600"
+                    >
+                      ...
+                    </text>
+                    <text
+                      x="353.5"
+                      y="85"
+                      font-family="monospace"
+                      font-size="6.5"
+                      fill="rgba(255,255,255,0.35)"
+                      text-anchor="middle"
+                    >
+                      8 more
+                    </text>
+                  </g>
+
+                  <!-- Cluster stats -->
+                  <rect
+                    x="185"
+                    y="105"
+                    width="190"
+                    height="50"
+                    rx="6"
+                    fill="#0a0a0a"
+                    stroke="rgba(255,255,255,0.05)"
+                    stroke-width="1"
+                  />
+                  <text
+                    x="195"
+                    y="120"
+                    font-family="monospace"
+                    font-size="7"
+                    fill="rgba(255,255,255,0.45)"
+                  >
+                    Throughput:
+                  </text>
+                  <text
+                    x="268"
+                    y="120"
+                    font-family="monospace"
+                    font-size="8"
+                    fill="#4ade80"
+                    font-weight="600"
+                  >
+                    35k events/sec
+                  </text>
+                  <text
+                    x="195"
+                    y="133"
+                    font-family="monospace"
+                    font-size="7"
+                    fill="rgba(255,255,255,0.45)"
+                  >
+                    Lag:
+                  </text>
+                  <text
+                    x="268"
+                    y="133"
+                    font-family="monospace"
+                    font-size="8"
+                    fill="#60a5fa"
+                    font-weight="600"
+                  >
+                    &lt;100ms
+                  </text>
+                  <text
+                    x="195"
+                    y="146"
+                    font-family="monospace"
+                    font-size="7"
+                    fill="rgba(255,255,255,0.45)"
+                  >
+                    Replicas:
+                  </text>
+                  <text
+                    x="268"
+                    y="146"
+                    font-family="monospace"
+                    font-size="8"
+                    fill="rgba(255,255,255,0.75)"
+                    font-weight="600"
+                  >
+                    3 brokers
+                  </text>
+
+                  <!-- Arrows to consumers -->
+                  <path
+                    d="M398 70 L430 70"
+                    stroke="rgba(34,211,238,0.4)"
+                    stroke-width="2"
+                    stroke-dasharray="6,3"
+                    fill="none"
+                  />
+                  <path
+                    d="M398 102 L430 102"
+                    stroke="rgba(139,92,246,0.4)"
+                    stroke-width="2"
+                    stroke-dasharray="6,3"
+                    fill="none"
+                  />
+                  <path
+                    d="M398 134 L430 134"
+                    stroke="rgba(251,146,60,0.4)"
+                    stroke-width="2"
+                    stroke-dasharray="6,3"
+                    fill="none"
+                  />
+
+                  <!-- Consumers (right) -->
+                  <rect
+                    x="430"
+                    y="30"
+                    width="110"
+                    height="136"
+                    rx="8"
+                    fill="#111"
+                    stroke="rgba(255,255,255,0.07)"
+                    stroke-width="1"
+                  />
+                  <text
+                    x="485"
+                    y="48"
+                    font-family="monospace"
+                    font-size="7.5"
+                    fill="rgba(255,255,255,0.28)"
+                    text-anchor="middle"
+                    letter-spacing="0.5"
+                  >
+                    CONSUMERS
+                  </text>
+
+                  <rect
+                    x="442"
+                    y="58"
+                    width="86"
+                    height="24"
+                    rx="4"
+                    fill="rgba(34,211,238,0.08)"
+                    stroke="rgba(34,211,238,0.25)"
+                    stroke-width="1"
+                  />
+                  <text
+                    x="450"
+                    y="72"
+                    font-family="monospace"
+                    font-size="7"
+                    fill="rgba(34,211,238,0.85)"
+                    font-weight="600"
+                  >
+                    Analytics
+                  </text>
+                  <text
+                    x="450"
+                    y="81"
+                    font-family="monospace"
+                    font-size="6.5"
+                    fill="rgba(255,255,255,0.28)"
+                  >
+                    Real-time
+                  </text>
+
+                  <rect
+                    x="442"
+                    y="90"
+                    width="86"
+                    height="24"
+                    rx="4"
+                    fill="rgba(139,92,246,0.08)"
+                    stroke="rgba(139,92,246,0.25)"
+                    stroke-width="1"
+                  />
+                  <text
+                    x="450"
+                    y="104"
+                    font-family="monospace"
+                    font-size="7"
+                    fill="rgba(139,92,246,0.85)"
+                    font-weight="600"
+                  >
+                    ML Pipeline
+                  </text>
+                  <text
+                    x="450"
+                    y="113"
+                    font-family="monospace"
+                    font-size="6.5"
+                    fill="rgba(255,255,255,0.28)"
+                  >
+                    Batch
+                  </text>
+
+                  <rect
+                    x="442"
+                    y="122"
+                    width="86"
+                    height="24"
+                    rx="4"
+                    fill="rgba(251,146,60,0.08)"
+                    stroke="rgba(251,146,60,0.25)"
+                    stroke-width="1"
+                  />
+                  <text
+                    x="450"
+                    y="136"
+                    font-family="monospace"
+                    font-size="7"
+                    fill="rgba(251,146,60,0.85)"
+                    font-weight="600"
+                  >
+                    Data Lake
+                  </text>
+                  <text
+                    x="450"
+                    y="145"
+                    font-family="monospace"
+                    font-size="6.5"
+                    fill="rgba(255,255,255,0.28)"
+                  >
+                    Archive
+                  </text>
+                </svg>
+              </div>
+              <div class="project-card__body">
+                <div class="project-card__meta">
+                  <span class="project-card__badge">Full-stack / Data</span>
+                  <span class="project-card__year">2025</span>
+                </div>
+                <h3 class="project-card__title">
+                  Event Streaming Analytics Pipeline
+                </h3>
+                <p class="project-card__desc">
+                  Real-time data processing pipeline using Apache Kafka handling
+                  35,000+ events per second. Multi-consumer architecture with
+                  sub-100ms lag, 3-broker cluster for fault tolerance, and
+                  seamless integration with analytics and ML workflows.
+                </p>
+                <ul class="tech-pill-list" aria-label="Technologies used">
+                  <li class="tech-pill">Apache Kafka</li>
+                  <li class="tech-pill">Python</li>
+                  <li class="tech-pill">Kafka Streams</li>
+                  <li class="tech-pill">PostgreSQL</li>
+                  <li class="tech-pill">Docker</li>
+                  <li class="tech-pill">Prometheus</li>
+                </ul>
+                <div class="project-card__links">
+                  <a
+                    href="https://github.com/Mohamedkabba444?tab=repositories"
+                    class="project-card__action-link"
+                    aria-label="View source on GitHub"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"
+                      />
+                    </svg>
+                    GitHub
+                  </a>
+                  <span class="project-card__availability">Demo coming soon</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- ─ Project 3: E-Commerce Backend ─ -->
+            <article
+              class="project-card"
+              aria-label="Cloud-Native E-Commerce Backend"
+            >
+              <div class="project-card__visual" aria-hidden="true">
+                <svg
+                  viewBox="0 0 560 196"
+                  xmlns="http://www.w3.org/2000/svg"
+                  preserveAspectRatio="xMidYMid slice"
+                >
+                  <rect width="560" height="196" fill="#0d0d0d" />
+                  <defs>
+                    <pattern
+                      id="grid-ec"
+                      width="28"
+                      height="28"
+                      patternUnits="userSpaceOnUse"
+                    >
+                      <path
+                        d="M28 0L0 0 0 28"
+                        fill="none"
+                        stroke="rgba(59,130,246,0.05)"
+                        stroke-width="0.5"
+                      />
+                    </pattern>
+                  </defs>
+                  <rect width="560" height="196" fill="url(#grid-ec)" />
+                  <ellipse
+                    cx="420"
+                    cy="40"
+                    rx="180"
+                    ry="80"
+                    fill="rgba(59,130,246,0.07)"
+                  />
+                  <!-- Terminal panel -->
+                  <rect
+                    x="18"
+                    y="16"
+                    width="326"
+                    height="164"
+                    rx="8"
+                    fill="#111"
+                    stroke="rgba(255,255,255,0.07)"
+                    stroke-width="1"
+                  />
+                  <rect
+                    x="18"
+                    y="16"
+                    width="326"
+                    height="30"
+                    rx="8"
+                    fill="#161616"
+                  />
+                  <rect x="18" y="36" width="326" height="10" fill="#161616" />
+                  <circle cx="34" cy="31" r="4" fill="#ef4444" opacity="0.7" />
+                  <circle cx="48" cy="31" r="4" fill="#f59e0b" opacity="0.7" />
+                  <circle cx="62" cy="31" r="4" fill="#22c55e" opacity="0.7" />
+                  <text
+                    x="88"
+                    y="35"
+                    font-family="monospace"
+                    font-size="8.5"
+                    fill="rgba(255,255,255,0.35)"
+                    letter-spacing="0.5"
+                  >
+                    API EXPLORER v2.0
+                  </text>
+                  <!-- GET row -->
+                  <rect
+                    x="30"
+                    y="58"
+                    width="36"
+                    height="15"
+                    rx="3"
+                    fill="rgba(34,197,94,0.14)"
+                    stroke="rgba(34,197,94,0.28)"
+                    stroke-width="0.8"
+                  />
+                  <text
+                    x="48"
+                    y="69"
+                    font-family="monospace"
+                    font-size="7"
+                    fill="#4ade80"
+                    font-weight="600"
+                    text-anchor="middle"
+                  >
+                    GET
+                  </text>
+                  <text
+                    x="76"
+                    y="69"
+                    font-family="monospace"
+                    font-size="8.5"
+                    fill="rgba(255,255,255,0.5)"
+                  >
+                    /api/products
+                  </text>
+                  <text
+                    x="293"
+                    y="69"
+                    font-family="monospace"
+                    font-size="7"
+                    fill="#4ade80"
+                    text-anchor="middle"
+                  >
+                    200
+                  </text>
+                  <text
+                    x="328"
+                    y="69"
+                    font-family="monospace"
+                    font-size="7"
+                    fill="rgba(255,255,255,0.22)"
+                  >
+                    12ms
+                  </text>
+                  <!-- POST row (highlighted) -->
+                  <rect
+                    x="26"
+                    y="81"
+                    width="314"
+                    height="18"
+                    rx="4"
+                    fill="rgba(59,130,246,0.07)"
+                  />
+                  <rect
+                    x="30"
+                    y="83"
+                    width="40"
+                    height="14"
+                    rx="3"
+                    fill="rgba(59,130,246,0.25)"
+                    stroke="rgba(59,130,246,0.4)"
+                    stroke-width="0.8"
+                  />
+                  <text
+                    x="50"
+                    y="93"
+                    font-family="monospace"
+                    font-size="7"
+                    fill="#60a5fa"
+                    font-weight="600"
+                    text-anchor="middle"
+                  >
+                    POST
+                  </text>
+                  <text
+                    x="80"
+                    y="93"
+                    font-family="monospace"
+                    font-size="8.5"
+                    fill="rgba(255,255,255,0.75)"
+                  >
+                    /api/orders
+                  </text>
+                  <text
+                    x="293"
+                    y="93"
+                    font-family="monospace"
+                    font-size="7"
+                    fill="#60a5fa"
+                    text-anchor="middle"
+                  >
+                    201
+                  </text>
+                  <text
+                    x="328"
+                    y="93"
+                    font-family="monospace"
+                    font-size="7"
+                    fill="rgba(255,255,255,0.22)"
+                  >
+                    8ms
+                  </text>
+                  <!-- DELETE row -->
+                  <rect
+                    x="30"
+                    y="108"
+                    width="40"
+                    height="14"
+                    rx="3"
+                    fill="rgba(239,68,68,0.12)"
+                    stroke="rgba(239,68,68,0.25)"
+                    stroke-width="0.8"
+                  />
+                  <text
+                    x="50"
+                    y="118"
+                    font-family="monospace"
+                    font-size="7"
+                    fill="#f87171"
+                    font-weight="600"
+                    text-anchor="middle"
+                  >
+                    DEL
+                  </text>
+                  <text
+                    x="80"
+                    y="118"
+                    font-family="monospace"
+                    font-size="8.5"
+                    fill="rgba(255,255,255,0.5)"
+                  >
+                    /api/orders/:id
+                  </text>
+                  <text
+                    x="293"
+                    y="118"
+                    font-family="monospace"
+                    font-size="7"
+                    fill="#4ade80"
+                    text-anchor="middle"
+                  >
+                    204
+                  </text>
+                  <text
+                    x="328"
+                    y="118"
+                    font-family="monospace"
+                    font-size="7"
+                    fill="rgba(255,255,255,0.22)"
+                  >
+                    5ms
+                  </text>
+                  <!-- PATCH row -->
+                  <rect
+                    x="30"
+                    y="132"
+                    width="40"
+                    height="14"
+                    rx="3"
+                    fill="rgba(251,191,36,0.12)"
+                    stroke="rgba(251,191,36,0.25)"
+                    stroke-width="0.8"
+                  />
+                  <text
+                    x="50"
+                    y="142"
+                    font-family="monospace"
+                    font-size="7"
+                    fill="#fbbf24"
+                    font-weight="600"
+                    text-anchor="middle"
+                  >
+                    PATCH
+                  </text>
+                  <text
+                    x="80"
+                    y="142"
+                    font-family="monospace"
+                    font-size="8.5"
+                    fill="rgba(255,255,255,0.5)"
+                  >
+                    /api/users/:id
+                  </text>
+                  <text
+                    x="293"
+                    y="142"
+                    font-family="monospace"
+                    font-size="7"
+                    fill="#4ade80"
+                    text-anchor="middle"
+                  >
+                    200
+                  </text>
+                  <text
+                    x="328"
+                    y="142"
+                    font-family="monospace"
+                    font-size="7"
+                    fill="rgba(255,255,255,0.22)"
+                  >
+                    9ms
+                  </text>
+                  <!-- Right metrics panel -->
+                  <rect
+                    x="362"
+                    y="16"
+                    width="180"
+                    height="164"
+                    rx="8"
+                    fill="#111"
+                    stroke="rgba(255,255,255,0.07)"
+                    stroke-width="1"
+                  />
+                  <text
+                    x="378"
+                    y="36"
+                    font-family="monospace"
+                    font-size="7.5"
+                    fill="rgba(255,255,255,0.28)"
+                    letter-spacing="0.5"
+                  >
+                    LIVE METRICS
+                  </text>
+                  <text
+                    x="378"
+                    y="62"
+                    font-family="monospace"
+                    font-size="9"
+                    fill="rgba(255,255,255,0.75)"
+                    font-weight="600"
+                  >
+                    5,214
+                  </text>
+                  <text
+                    x="378"
+                    y="74"
+                    font-family="monospace"
+                    font-size="6.5"
+                    fill="rgba(255,255,255,0.28)"
+                  >
+                    Requests / min
+                  </text>
+                  <text
+                    x="378"
+                    y="100"
+                    font-family="monospace"
+                    font-size="9"
+                    fill="#4ade80"
+                    font-weight="600"
+                  >
+                    40%
+                  </text>
+                  <text
+                    x="378"
+                    y="112"
+                    font-family="monospace"
+                    font-size="6.5"
+                    fill="rgba(255,255,255,0.28)"
+                  >
+                    Cache hit rate
+                  </text>
+                  <text
+                    x="378"
+                    y="138"
+                    font-family="monospace"
+                    font-size="9"
+                    fill="#60a5fa"
+                    font-weight="600"
+                  >
+                    24ms
+                  </text>
+                  <text
+                    x="378"
+                    y="150"
+                    font-family="monospace"
+                    font-size="6.5"
+                    fill="rgba(255,255,255,0.28)"
+                  >
+                    p99 latency
+                  </text>
+                  <text
+                    x="378"
+                    y="168"
+                    font-family="monospace"
+                    font-size="7.5"
+                    fill="#4ade80"
+                    font-weight="600"
+                  >
+                    $48.2k today
+                  </text>
+                </svg>
+              </div>
+              <div class="project-card__body">
+                <div class="project-card__meta">
+                  <span class="project-card__badge">Full-stack / API</span>
+                  <span class="project-card__year">2025</span>
+                </div>
+                <h3 class="project-card__title">
+                  Cloud-Native E-Commerce Backend
+                </h3>
+                <p class="project-card__desc">
+                  Microservice REST API handling 5,000+ RPM with Redis caching,
+                  Stripe payment processing, and a PostgreSQL cluster. 40%
+                  cache-hit rate achieved through intelligent cache invalidation
+                  strategies.
+                </p>
+                <ul class="tech-pill-list" aria-label="Technologies used">
+                  <li class="tech-pill">Node.js</li>
+                  <li class="tech-pill">TypeScript</li>
+                  <li class="tech-pill">PostgreSQL</li>
+                  <li class="tech-pill">Redis</li>
+                  <li class="tech-pill">Stripe</li>
+                  <li class="tech-pill">Docker</li>
+                </ul>
+                <div class="project-card__links">
+                  <a
+                    href="https://github.com/Mohamedkabba444?tab=repositories"
+                    class="project-card__action-link"
+                    aria-label="View source on GitHub"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"
+                      />
+                    </svg>
+                    GitHub
+                  </a>
+                  <span class="project-card__availability">Demo coming soon</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- ─ Project 4: AI Study Architect ─ -->
+            <article class="project-card" aria-label="AI Study Architect">
+              <div class="project-card__visual" aria-hidden="true">
+                <svg
+                  viewBox="0 0 560 196"
+                  xmlns="http://www.w3.org/2000/svg"
+                  preserveAspectRatio="xMidYMid slice"
+                >
+                  <rect width="560" height="196" fill="#0d0d0d" />
+                  <defs>
+                    <pattern
+                      id="grid-ai"
+                      width="28"
+                      height="28"
+                      patternUnits="userSpaceOnUse"
+                    >
+                      <path
+                        d="M28 0L0 0 0 28"
+                        fill="none"
+                        stroke="rgba(139,92,246,0.05)"
+                        stroke-width="0.5"
+                      />
+                    </pattern>
+                  </defs>
+                  <rect width="560" height="196" fill="url(#grid-ai)" />
+                  <ellipse
+                    cx="280"
+                    cy="98"
+                    rx="220"
+                    ry="100"
+                    fill="rgba(139,92,246,0.05)"
+                  />
+                  <!-- Input panel -->
+                  <rect
+                    x="18"
+                    y="22"
+                    width="138"
+                    height="152"
+                    rx="8"
+                    fill="#111"
+                    stroke="rgba(255,255,255,0.07)"
+                    stroke-width="1"
+                  />
+                  <text
+                    x="87"
+                    y="42"
+                    font-family="monospace"
+                    font-size="7.5"
+                    fill="rgba(255,255,255,0.28)"
+                    text-anchor="middle"
+                    letter-spacing="0.5"
+                  >
+                    INPUT
+                  </text>
+                  <rect
+                    x="58"
+                    y="52"
+                    width="58"
+                    height="68"
+                    rx="4"
+                    fill="#1a1a1a"
+                    stroke="rgba(255,255,255,0.09)"
+                    stroke-width="1"
+                  />
+                  <rect
+                    x="58"
+                    y="52"
+                    width="58"
+                    height="14"
+                    rx="4"
+                    fill="rgba(139,92,246,0.22)"
+                  />
+                  <rect
+                    x="66"
+                    y="76"
+                    width="42"
+                    height="2"
+                    rx="1"
+                    fill="rgba(255,255,255,0.14)"
+                  />
+                  <rect
+                    x="66"
+                    y="83"
+                    width="36"
+                    height="2"
+                    rx="1"
+                    fill="rgba(255,255,255,0.09)"
+                  />
+                  <rect
+                    x="66"
+                    y="90"
+                    width="40"
+                    height="2"
+                    rx="1"
+                    fill="rgba(255,255,255,0.09)"
+                  />
+                  <rect
+                    x="66"
+                    y="97"
+                    width="30"
+                    height="2"
+                    rx="1"
+                    fill="rgba(255,255,255,0.09)"
+                  />
+                  <text
+                    x="87"
+                    y="135"
+                    font-family="monospace"
+                    font-size="7.5"
+                    fill="rgba(255,255,255,0.45)"
+                    text-anchor="middle"
+                  >
+                    lecture.pdf
+                  </text>
+                  <text
+                    x="87"
+                    y="147"
+                    font-family="monospace"
+                    font-size="7"
+                    fill="rgba(255,255,255,0.22)"
+                    text-anchor="middle"
+                  >
+                    4.2 MB
+                  </text>
+                  <!-- Arrow -->
+                  <path
+                    d="M164 98 L200 98"
+                    stroke="rgba(139,92,246,0.5)"
+                    stroke-width="1.5"
+                    stroke-dasharray="3,2"
+                    fill="none"
+                  />
+                  <path
+                    d="M196 94 L204 98 L196 102"
+                    fill="rgba(139,92,246,0.5)"
+                  />
+                  <!-- Processing panel -->
+                  <rect
+                    x="204"
+                    y="22"
+                    width="152"
+                    height="152"
+                    rx="8"
+                    fill="#111"
+                    stroke="rgba(139,92,246,0.22)"
+                    stroke-width="1"
+                  />
+                  <text
+                    x="280"
+                    y="42"
+                    font-family="monospace"
+                    font-size="7.5"
+                    fill="rgba(139,92,246,0.7)"
+                    text-anchor="middle"
+                    letter-spacing="0.5"
+                  >
+                    PROCESSING
+                  </text>
+                  <circle
+                    cx="280"
+                    cy="96"
+                    r="30"
+                    fill="none"
+                    stroke="rgba(139,92,246,0.1)"
+                    stroke-width="4"
+                  />
+                  <path
+                    d="M280 66 A30 30 0 0 1 310 96"
+                    fill="none"
+                    stroke="rgba(139,92,246,0.85)"
+                    stroke-width="4"
+                    stroke-linecap="round"
+                  >
+                    <animateTransform
+                      attributeName="transform"
+                      type="rotate"
+                      from="0 280 96"
+                      to="360 280 96"
+                      dur="1.8s"
+                      repeatCount="indefinite"
+                    />
+                  </path>
+                  <text
+                    x="280"
+                    y="93"
+                    font-family="monospace"
+                    font-size="9"
+                    fill="rgba(139,92,246,0.9)"
+                    text-anchor="middle"
+                    font-weight="600"
+                  >
+                    RAG
+                  </text>
+                  <text
+                    x="280"
+                    y="105"
+                    font-family="monospace"
+                    font-size="7"
+                    fill="rgba(255,255,255,0.28)"
+                    text-anchor="middle"
+                  >
+                    Gemini API
+                  </text>
+                  <text
+                    x="280"
+                    y="145"
+                    font-family="monospace"
+                    font-size="7.5"
+                    fill="rgba(139,92,246,0.65)"
+                    text-anchor="middle"
+                  >
+                    ✓ Embedding done
+                  </text>
+                  <text
+                    x="280"
+                    y="158"
+                    font-family="monospace"
+                    font-size="7.5"
+                    fill="rgba(255,255,255,0.28)"
+                    text-anchor="middle"
+                  >
+                    Generating cards…
+                  </text>
+                  <!-- Arrow -->
+                  <path
+                    d="M364 98 L400 98"
+                    stroke="rgba(139,92,246,0.5)"
+                    stroke-width="1.5"
+                    stroke-dasharray="3,2"
+                    fill="none"
+                  />
+                  <path
+                    d="M396 94 L404 98 L396 102"
+                    fill="rgba(139,92,246,0.5)"
+                  />
+                  <!-- Output panel -->
+                  <rect
+                    x="404"
+                    y="22"
+                    width="138"
+                    height="152"
+                    rx="8"
+                    fill="#111"
+                    stroke="rgba(255,255,255,0.07)"
+                    stroke-width="1"
+                  />
+                  <text
+                    x="473"
+                    y="42"
+                    font-family="monospace"
+                    font-size="7.5"
+                    fill="rgba(255,255,255,0.28)"
+                    text-anchor="middle"
+                    letter-spacing="0.5"
+                  >
+                    OUTPUT
+                  </text>
+                  <rect
+                    x="414"
+                    y="52"
+                    width="118"
+                    height="46"
+                    rx="6"
+                    fill="#1a1a1a"
+                    stroke="rgba(59,130,246,0.22)"
+                    stroke-width="1"
+                  />
+                  <text
+                    x="473"
+                    y="68"
+                    font-family="monospace"
+                    font-size="7"
+                    fill="rgba(59,130,246,0.8)"
+                    text-anchor="middle"
+                  >
+                    Q: What is RAG?
+                  </text>
+                  <line
+                    x1="422"
+                    y1="73"
+                    x2="524"
+                    y2="73"
+                    stroke="rgba(255,255,255,0.05)"
+                    stroke-width="1"
+                  />
+                  <text
+                    x="473"
+                    y="85"
+                    font-family="monospace"
+                    font-size="6.5"
+                    fill="rgba(255,255,255,0.4)"
+                    text-anchor="middle"
+                  >
+                    Retrieval-Augmented
+                  </text>
+                  <text
+                    x="473"
+                    y="94"
+                    font-family="monospace"
+                    font-size="6.5"
+                    fill="rgba(255,255,255,0.4)"
+                    text-anchor="middle"
+                  >
+                    Generation
+                  </text>
+                  <rect
+                    x="414"
+                    y="106"
+                    width="118"
+                    height="46"
+                    rx="6"
+                    fill="#1a1a1a"
+                    stroke="rgba(139,92,246,0.22)"
+                    stroke-width="1"
+                  />
+                  <text
+                    x="473"
+                    y="122"
+                    font-family="monospace"
+                    font-size="7"
+                    fill="rgba(139,92,246,0.8)"
+                    text-anchor="middle"
+                  >
+                    Q: Vector DB?
+                  </text>
+                  <line
+                    x1="422"
+                    y1="127"
+                    x2="524"
+                    y2="127"
+                    stroke="rgba(255,255,255,0.05)"
+                    stroke-width="1"
+                  />
+                  <text
+                    x="473"
+                    y="139"
+                    font-family="monospace"
+                    font-size="6.5"
+                    fill="rgba(255,255,255,0.4)"
+                    text-anchor="middle"
+                  >
+                    Semantic numerical
+                  </text>
+                  <text
+                    x="473"
+                    y="148"
+                    font-family="monospace"
+                    font-size="6.5"
+                    fill="rgba(255,255,255,0.4)"
+                    text-anchor="middle"
+                  >
+                    representation
+                  </text>
+                  <rect
+                    x="432"
+                    y="160"
+                    width="82"
+                    height="18"
+                    rx="9"
+                    fill="rgba(59,130,246,0.1)"
+                    stroke="rgba(59,130,246,0.28)"
+                    stroke-width="1"
+                  />
+                  <text
+                    x="473"
+                    y="172"
+                    font-family="monospace"
+                    font-size="7.5"
+                    fill="#60a5fa"
+                    text-anchor="middle"
+                    font-weight="600"
+                  >
+                    24 cards
+                  </text>
+                </svg>
+              </div>
+              <div class="project-card__body">
+                <div class="project-card__meta">
+                  <span class="project-card__badge">AI / EdTech</span>
+                  <span class="project-card__year">2025</span>
+                </div>
+                <h3 class="project-card__title">AI Study Architect</h3>
+                <p class="project-card__desc">
+                  Developed an AI-powered learning platform that generates
+                  personalized flashcards and study materials using RAG
+                  (Retrieval-Augmented Generation). Integrated Gemini API for
+                  intelligent content processing, implemented vector embeddings
+                  for semantic search, and built an intuitive interface for
+                  students to master complex topics.
+                </p>
+                <ul class="tech-pill-list" aria-label="Technologies used">
+                  <li class="tech-pill">Python</li>
+                  <li class="tech-pill">FastAPI</li>
+                  <li class="tech-pill">Gemini API</li>
+                  <li class="tech-pill">LangChain</li>
+                  <li class="tech-pill">PostgreSQL</li>
+                  <li class="tech-pill">pgvector</li>
+                </ul>
+                <div class="project-card__links">
+                  <a
+                    href="https://github.com/Mohamedkabba444?tab=repositories"
+                    class="project-card__action-link"
+                    aria-label="View source on GitHub"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"
+                      />
+                    </svg>
+                    GitHub
+                  </a>
+                  <span class="project-card__availability">Demo coming soon</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- ─ Project 5: TabSnapshot ─ -->
+            <article
+              class="project-card"
+              aria-label="TabSnapshot browser workspace extension"
+            >
+              <div class="project-card__visual" aria-hidden="true">
+                <svg
+                  viewBox="0 0 560 196"
+                  xmlns="http://www.w3.org/2000/svg"
+                  preserveAspectRatio="xMidYMid slice"
+                >
+                  <rect width="560" height="196" fill="#0d0d0d" />
+                  <defs>
+                    <pattern
+                      id="grid-hub"
+                      width="28"
+                      height="28"
+                      patternUnits="userSpaceOnUse"
+                    >
+                      <path
+                        d="M28 0L0 0 0 28"
+                        fill="none"
+                        stroke="rgba(34,211,238,0.04)"
+                        stroke-width="0.5"
+                      />
+                    </pattern>
+                  </defs>
+                  <rect width="560" height="196" fill="url(#grid-hub)" />
+                  <ellipse
+                    cx="140"
+                    cy="98"
+                    rx="180"
+                    ry="90"
+                    fill="rgba(34,211,238,0.04)"
+                  />
+                  <!-- TODO column -->
+                  <rect
+                    x="14"
+                    y="14"
+                    width="136"
+                    height="168"
+                    rx="8"
+                    fill="#111"
+                    stroke="rgba(255,255,255,0.07)"
+                    stroke-width="1"
+                  />
+                  <text
+                    x="82"
+                    y="32"
+                    font-family="monospace"
+                    font-size="7.5"
+                    fill="rgba(255,255,255,0.28)"
+                    text-anchor="middle"
+                    letter-spacing="0.5"
+                  >
+                    SAVED TABS
+                  </text>
+                  <rect
+                    x="22"
+                    y="42"
+                    width="120"
+                    height="40"
+                    rx="5"
+                    fill="#161616"
+                    stroke="rgba(255,255,255,0.06)"
+                    stroke-width="1"
+                  />
+                  <rect
+                    x="30"
+                    y="50"
+                    width="60"
+                    height="4"
+                    rx="2"
+                    fill="rgba(255,255,255,0.2)"
+                  />
+                  <rect
+                    x="30"
+                    y="58"
+                    width="80"
+                    height="3"
+                    rx="1"
+                    fill="rgba(255,255,255,0.08)"
+                  />
+                  <rect
+                    x="30"
+                    y="65"
+                    width="64"
+                    height="3"
+                    rx="1"
+                    fill="rgba(255,255,255,0.08)"
+                  />
+                  <rect
+                    x="22"
+                    y="90"
+                    width="120"
+                    height="40"
+                    rx="5"
+                    fill="#161616"
+                    stroke="rgba(255,255,255,0.06)"
+                    stroke-width="1"
+                  />
+                  <rect
+                    x="30"
+                    y="98"
+                    width="50"
+                    height="4"
+                    rx="2"
+                    fill="rgba(255,255,255,0.2)"
+                  />
+                  <rect
+                    x="30"
+                    y="106"
+                    width="72"
+                    height="3"
+                    rx="1"
+                    fill="rgba(255,255,255,0.08)"
+                  />
+                  <rect
+                    x="30"
+                    y="113"
+                    width="56"
+                    height="3"
+                    rx="1"
+                    fill="rgba(255,255,255,0.08)"
+                  />
+                  <!-- IN PROGRESS column (highlighted) -->
+                  <rect
+                    x="162"
+                    y="14"
+                    width="136"
+                    height="168"
+                    rx="8"
+                    fill="#111"
+                    stroke="rgba(34,211,238,0.2)"
+                    stroke-width="1"
+                  />
+                  <text
+                    x="230"
+                    y="32"
+                    font-family="monospace"
+                    font-size="7"
+                    fill="rgba(34,211,238,0.7)"
+                    text-anchor="middle"
+                    letter-spacing="0.5"
+                  >
+                    SNAPSHOT
+                  </text>
+                  <rect
+                    x="170"
+                    y="42"
+                    width="120"
+                    height="52"
+                    rx="5"
+                    fill="#161616"
+                    stroke="rgba(34,211,238,0.15)"
+                    stroke-width="1"
+                  />
+                  <rect
+                    x="178"
+                    y="50"
+                    width="70"
+                    height="4"
+                    rx="2"
+                    fill="rgba(255,255,255,0.25)"
+                  />
+                  <rect
+                    x="178"
+                    y="58"
+                    width="90"
+                    height="3"
+                    rx="1"
+                    fill="rgba(255,255,255,0.1)"
+                  />
+                  <rect
+                    x="178"
+                    y="65"
+                    width="74"
+                    height="3"
+                    rx="1"
+                    fill="rgba(255,255,255,0.1)"
+                  />
+                  <!-- Animated cursor (typing indicator) -->
+                  <rect
+                    x="178"
+                    y="74"
+                    width="5"
+                    height="8"
+                    rx="1"
+                    fill="rgba(34,211,238,0.7)"
+                  >
+                    <animate
+                      attributeName="opacity"
+                      values="1;0;1"
+                      dur="1s"
+                      repeatCount="indefinite"
+                    />
+                  </rect>
+                  <circle
+                    cx="278"
+                    cy="56"
+                    r="8"
+                    fill="rgba(251,191,36,0.2)"
+                    stroke="rgba(251,191,36,0.5)"
+                    stroke-width="1"
+                  />
+                  <text
+                    x="278"
+                    y="60"
+                    font-family="monospace"
+                    font-size="7"
+                    fill="#fbbf24"
+                    text-anchor="middle"
+                    font-weight="600"
+                  >
+                    A
+                  </text>
+                  <rect
+                    x="170"
+                    y="102"
+                    width="120"
+                    height="40"
+                    rx="5"
+                    fill="#161616"
+                    stroke="rgba(255,255,255,0.06)"
+                    stroke-width="1"
+                  />
+                  <rect
+                    x="178"
+                    y="110"
+                    width="60"
+                    height="4"
+                    rx="2"
+                    fill="rgba(255,255,255,0.2)"
+                  />
+                  <rect
+                    x="178"
+                    y="118"
+                    width="80"
+                    height="3"
+                    rx="1"
+                    fill="rgba(255,255,255,0.08)"
+                  />
+                  <!-- DONE column -->
+                  <rect
+                    x="310"
+                    y="14"
+                    width="136"
+                    height="168"
+                    rx="8"
+                    fill="#111"
+                    stroke="rgba(255,255,255,0.07)"
+                    stroke-width="1"
+                  />
+                  <text
+                    x="378"
+                    y="32"
+                    font-family="monospace"
+                    font-size="7.5"
+                    fill="rgba(74,222,128,0.6)"
+                    text-anchor="middle"
+                    letter-spacing="0.5"
+                  >
+                    RESTORE
+                  </text>
+                  <rect
+                    x="318"
+                    y="42"
+                    width="120"
+                    height="40"
+                    rx="5"
+                    fill="#161616"
+                    stroke="rgba(34,197,94,0.1)"
+                    stroke-width="1"
+                  />
+                  <text
+                    x="324"
+                    y="56"
+                    font-family="monospace"
+                    font-size="9"
+                    fill="rgba(34,197,94,0.7)"
+                  >
+                    ✓
+                  </text>
+                  <rect
+                    x="340"
+                    y="50"
+                    width="60"
+                    height="4"
+                    rx="2"
+                    fill="rgba(255,255,255,0.15)"
+                  />
+                  <rect
+                    x="340"
+                    y="58"
+                    width="80"
+                    height="3"
+                    rx="1"
+                    fill="rgba(255,255,255,0.07)"
+                  />
+                  <rect
+                    x="318"
+                    y="90"
+                    width="120"
+                    height="40"
+                    rx="5"
+                    fill="#161616"
+                    stroke="rgba(34,197,94,0.1)"
+                    stroke-width="1"
+                  />
+                  <text
+                    x="324"
+                    y="104"
+                    font-family="monospace"
+                    font-size="9"
+                    fill="rgba(34,197,94,0.7)"
+                  >
+                    ✓
+                  </text>
+                  <rect
+                    x="340"
+                    y="98"
+                    width="55"
+                    height="4"
+                    rx="2"
+                    fill="rgba(255,255,255,0.15)"
+                  />
+                  <rect
+                    x="340"
+                    y="106"
+                    width="74"
+                    height="3"
+                    rx="1"
+                    fill="rgba(255,255,255,0.07)"
+                  />
+                  <!-- Activity panel -->
+                  <rect
+                    x="458"
+                    y="14"
+                    width="88"
+                    height="168"
+                    rx="8"
+                    fill="#111"
+                    stroke="rgba(255,255,255,0.07)"
+                    stroke-width="1"
+                  />
+                  <text
+                    x="502"
+                    y="30"
+                    font-family="monospace"
+                    font-size="6.5"
+                    fill="rgba(255,255,255,0.22)"
+                    text-anchor="middle"
+                  >
+                    LOCAL ONLY
+                  </text>
+                  <circle cx="470" cy="46" r="3" fill="rgba(34,197,94,0.8)">
+                    <animate
+                      attributeName="r"
+                      values="3;5;3"
+                      dur="1.5s"
+                      repeatCount="indefinite"
+                    />
+                    <animate
+                      attributeName="opacity"
+                      values="1;0.4;1"
+                      dur="1.5s"
+                      repeatCount="indefinite"
+                    />
+                  </circle>
+                  <text
+                    x="478"
+                    y="50"
+                    font-family="monospace"
+                    font-size="6.5"
+                    fill="rgba(34,197,94,0.7)"
+                  >
+                    3 online
+                  </text>
+                  <text
+                    x="464"
+                    y="68"
+                    font-family="monospace"
+                    font-size="6"
+                    fill="rgba(255,255,255,0.35)"
+                  >
+                    alice
+                  </text>
+                  <text
+                    x="464"
+                    y="78"
+                    font-family="monospace"
+                    font-size="6"
+                    fill="rgba(255,255,255,0.2)"
+                  >
+                    bob
+                  </text>
+                  <text
+                    x="464"
+                    y="88"
+                    font-family="monospace"
+                    font-size="6"
+                    fill="rgba(255,255,255,0.2)"
+                  >
+                    carol
+                  </text>
+                  <text
+                    x="464"
+                    y="110"
+                    font-family="monospace"
+                    font-size="5.5"
+                    fill="rgba(34,211,238,0.5)"
+                  >
+                    WS/TLS
+                  </text>
+                  <text
+                    x="464"
+                    y="122"
+                    font-family="monospace"
+                    font-size="5.5"
+                    fill="rgba(255,255,255,0.2)"
+                  >
+                    214 ev/s
+                  </text>
+                </svg>
+              </div>
+              <div class="project-card__body">
+                <div class="project-card__meta">
+                  <span class="project-card__badge">Full-stack / Extension</span>
+                  <span class="project-card__year">2025</span>
+                </div>
+                <h3 class="project-card__title">TabSnapshot</h3>
+                <p class="project-card__desc">
+                  Privacy-first browser extension for capturing and restoring
+                  complete browser workspaces in one click. Includes named
+                  snapshots, partial restore, search, archive, scheduled
+                  backups, and cross-browser WebExtensions support.
+                </p>
+                <ul class="tech-pill-list" aria-label="Technologies used">
+                  <li class="tech-pill">JavaScript</li>
+                  <li class="tech-pill">WebExtensions API</li>
+                  <li class="tech-pill">Local Storage</li>
+                  <li class="tech-pill">Manifest V3</li>
+                  <li class="tech-pill">CSS</li>
+                </ul>
+                <div class="project-card__links">
+                  <a
+                    href="https://github.com/Mohamedkabba444/TabSnapshot"
+                    class="project-card__action-link"
+                    aria-label="View source on GitHub"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"
+                      />
+                    </svg>
+                    GitHub
+                  </a>
+                  <span class="project-card__availability">Demo coming soon</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- ─ Project 6: LinkSnip ─ -->
+            <article
+              class="project-card"
+              aria-label="LinkSnip modern URL shortener"
+            >
+              <div class="project-card__visual" aria-hidden="true">
+                <svg
+                  viewBox="0 0 560 196"
+                  xmlns="http://www.w3.org/2000/svg"
+                  preserveAspectRatio="xMidYMid slice"
+                >
+                  <rect width="560" height="196" fill="#0d0d0d" />
+                  <defs>
+                    <pattern
+                      id="grid-tq"
+                      width="28"
+                      height="28"
+                      patternUnits="userSpaceOnUse"
+                    >
+                      <path
+                        d="M28 0L0 0 0 28"
+                        fill="none"
+                        stroke="rgba(99,102,241,0.05)"
+                        stroke-width="0.5"
+                      />
+                    </pattern>
+                    <linearGradient
+                      id="grad-queue"
+                      x1="0%"
+                      y1="0%"
+                      x2="100%"
+                      y2="100%"
+                    >
+                      <stop
+                        offset="0%"
+                        style="stop-color: #6366f1; stop-opacity: 0.2"
+                      />
+                      <stop
+                        offset="100%"
+                        style="stop-color: #8b5cf6; stop-opacity: 0.1"
+                      />
+                    </linearGradient>
+                  </defs>
+                  <rect width="560" height="196" fill="url(#grid-tq)" />
+                  <ellipse
+                    cx="420"
+                    cy="100"
+                    rx="160"
+                    ry="80"
+                    fill="url(#grad-queue)"
+                  />
+
+                  <!-- Message Queue Visualization -->
+                  <g transform="translate(60, 60)">
+                    <!-- Queue boxes -->
+                    <rect
+                      x="0"
+                      y="0"
+                      width="60"
+                      height="40"
+                      rx="4"
+                      fill="#6366f1"
+                      opacity="0.3"
+                      stroke="#8b5cf6"
+                      stroke-width="1.5"
+                    />
+                    <rect
+                      x="70"
+                      y="0"
+                      width="60"
+                      height="40"
+                      rx="4"
+                      fill="#6366f1"
+                      opacity="0.4"
+                      stroke="#8b5cf6"
+                      stroke-width="1.5"
+                    />
+                    <rect
+                      x="140"
+                      y="0"
+                      width="60"
+                      height="40"
+                      rx="4"
+                      fill="#6366f1"
+                      opacity="0.5"
+                      stroke="#8b5cf6"
+                      stroke-width="1.5"
+                    />
+                    <rect
+                      x="210"
+                      y="0"
+                      width="60"
+                      height="40"
+                      rx="4"
+                      fill="#6366f1"
+                      opacity="0.6"
+                      stroke="#8b5cf6"
+                      stroke-width="1.5"
+                    />
+                    <rect
+                      x="280"
+                      y="0"
+                      width="60"
+                      height="40"
+                      rx="4"
+                      fill="#6366f1"
+                      opacity="0.7"
+                      stroke="#8b5cf6"
+                      stroke-width="1.5"
+                    />
+
+                    <!-- Job labels -->
+                    <text
+                      x="30"
+                      y="24"
+                      font-family="monospace"
+                      font-size="8"
+                      fill="rgba(255,255,255,0.7)"
+                      text-anchor="middle"
+                      font-weight="600"
+                    >
+                      JOB
+                    </text>
+                    <text
+                      x="100"
+                      y="24"
+                      font-family="monospace"
+                      font-size="8"
+                      fill="rgba(255,255,255,0.7)"
+                      text-anchor="middle"
+                      font-weight="600"
+                    >
+                      JOB
+                    </text>
+                    <text
+                      x="170"
+                      y="24"
+                      font-family="monospace"
+                      font-size="8"
+                      fill="rgba(255,255,255,0.7)"
+                      text-anchor="middle"
+                      font-weight="600"
+                    >
+                      JOB
+                    </text>
+                    <text
+                      x="240"
+                      y="24"
+                      font-family="monospace"
+                      font-size="8"
+                      fill="rgba(255,255,255,0.7)"
+                      text-anchor="middle"
+                      font-weight="600"
+                    >
+                      JOB
+                    </text>
+                    <text
+                      x="310"
+                      y="24"
+                      font-family="monospace"
+                      font-size="8"
+                      fill="rgba(255,255,255,0.7)"
+                      text-anchor="middle"
+                      font-weight="600"
+                    >
+                      JOB
+                    </text>
+
+                    <!-- Flow arrows -->
+                    <path
+                      d="M 62 20 L 68 20 M 65 17 L 68 20 L 65 23"
+                      stroke="#8b5cf6"
+                      stroke-width="2"
+                      fill="none"
+                    />
+                    <path
+                      d="M 132 20 L 138 20 M 135 17 L 138 20 L 135 23"
+                      stroke="#8b5cf6"
+                      stroke-width="2"
+                      fill="none"
+                    />
+                    <path
+                      d="M 202 20 L 208 20 M 205 17 L 208 20 L 205 23"
+                      stroke="#8b5cf6"
+                      stroke-width="2"
+                      fill="none"
+                    />
+                    <path
+                      d="M 272 20 L 278 20 M 275 17 L 278 20 L 275 23"
+                      stroke="#8b5cf6"
+                      stroke-width="2"
+                      fill="none"
+                    />
+
+                    <!-- Worker pool nodes -->
+                    <circle
+                      cx="85"
+                      cy="75"
+                      r="12"
+                      fill="#22d3ee"
+                      opacity="0.9"
+                      stroke="#fff"
+                      stroke-width="1.5"
+                    />
+                    <circle
+                      cx="170"
+                      cy="75"
+                      r="12"
+                      fill="#22d3ee"
+                      opacity="0.9"
+                      stroke="#fff"
+                      stroke-width="1.5"
+                    />
+                    <circle
+                      cx="255"
+                      cy="75"
+                      r="12"
+                      fill="#22d3ee"
+                      opacity="0.9"
+                      stroke="#fff"
+                      stroke-width="1.5"
+                    />
+
+                    <!-- Worker labels -->
+                    <text
+                      x="85"
+                      y="79"
+                      font-family="monospace"
+                      font-size="7"
+                      fill="#000"
+                      text-anchor="middle"
+                      font-weight="700"
+                    >
+                      W1
+                    </text>
+                    <text
+                      x="170"
+                      y="79"
+                      font-family="monospace"
+                      font-size="7"
+                      fill="#000"
+                      text-anchor="middle"
+                      font-weight="700"
+                    >
+                      W2
+                    </text>
+                    <text
+                      x="255"
+                      y="79"
+                      font-family="monospace"
+                      font-size="7"
+                      fill="#000"
+                      text-anchor="middle"
+                      font-weight="700"
+                    >
+                      W3
+                    </text>
+
+                    <!-- Connection lines to workers -->
+                    <path
+                      d="M 85 42 L 85 63"
+                      stroke="#22d3ee"
+                      stroke-width="2"
+                      stroke-dasharray="3,3"
+                      opacity="0.6"
+                    />
+                    <path
+                      d="M 170 42 L 170 63"
+                      stroke="#22d3ee"
+                      stroke-width="2"
+                      stroke-dasharray="3,3"
+                      opacity="0.6"
+                    />
+                    <path
+                      d="M 255 42 L 255 63"
+                      stroke="#22d3ee"
+                      stroke-width="2"
+                      stroke-dasharray="3,3"
+                      opacity="0.6"
+                    />
+                  </g>
+
+                  <!-- Stats panel -->
+                  <rect
+                    x="380"
+                    y="25"
+                    width="160"
+                    height="150"
+                    rx="8"
+                    fill="#111"
+                    stroke="rgba(255,255,255,0.07)"
+                    stroke-width="1"
+                  />
+                  <text
+                    x="395"
+                    y="45"
+                    font-family="monospace"
+                    font-size="8"
+                    fill="rgba(255,255,255,0.35)"
+                    letter-spacing="0.5"
+                  >
+                    QUEUE METRICS
+                  </text>
+
+                  <!-- Throughput -->
+                  <text
+                    x="395"
+                    y="70"
+                    font-family="monospace"
+                    font-size="7.5"
+                    fill="rgba(255,255,255,0.5)"
+                  >
+                    Throughput
+                  </text>
+                  <text
+                    x="520"
+                    y="70"
+                    font-family="monospace"
+                    font-size="9"
+                    fill="#6366f1"
+                    text-anchor="end"
+                    font-weight="600"
+                  >
+                    10.2K/min
+                  </text>
+
+                  <!-- Latency -->
+                  <text
+                    x="395"
+                    y="95"
+                    font-family="monospace"
+                    font-size="7.5"
+                    fill="rgba(255,255,255,0.5)"
+                  >
+                    Avg Latency
+                  </text>
+                  <text
+                    x="520"
+                    y="95"
+                    font-family="monospace"
+                    font-size="9"
+                    fill="#22d3ee"
+                    text-anchor="end"
+                    font-weight="600"
+                  >
+                    0.8s
+                  </text>
+
+                  <!-- Success rate -->
+                  <text
+                    x="395"
+                    y="120"
+                    font-family="monospace"
+                    font-size="7.5"
+                    fill="rgba(255,255,255,0.5)"
+                  >
+                    Success Rate
+                  </text>
+                  <text
+                    x="520"
+                    y="120"
+                    font-family="monospace"
+                    font-size="9"
+                    fill="#4ade80"
+                    text-anchor="end"
+                    font-weight="600"
+                  >
+                    99.9%
+                  </text>
+
+                  <!-- Workers active -->
+                  <text
+                    x="395"
+                    y="145"
+                    font-family="monospace"
+                    font-size="7.5"
+                    fill="rgba(255,255,255,0.5)"
+                  >
+                    Active Workers
+                  </text>
+                  <text
+                    x="520"
+                    y="145"
+                    font-family="monospace"
+                    font-size="9"
+                    fill="#f59e0b"
+                    text-anchor="end"
+                    font-weight="600"
+                  >
+                    24/32
+                  </text>
+
+                  <!-- Status badge -->
+                  <rect
+                    x="395"
+                    y="158"
+                    width="130"
+                    height="12"
+                    rx="3"
+                    fill="rgba(34,197,94,0.1)"
+                    stroke="rgba(34,197,94,0.3)"
+                    stroke-width="1"
+                  />
+                  <circle cx="403" cy="164" r="2.5" fill="#4ade80" />
+                  <text
+                    x="410"
+                    y="166"
+                    font-family="monospace"
+                    font-size="6.5"
+                    fill="#4ade80"
+                    font-weight="600"
+                  >
+                    HEALTHY
+                  </text>
+
+                  <!-- Title -->
+                  <text
+                    x="20"
+                    y="25"
+                    font-family="monospace"
+                    font-size="10"
+                    fill="rgba(255,255,255,0.4)"
+                    letter-spacing="0.5"
+                  >
+                    RABBITMQ CLUSTER
+                  </text>
+                </svg>
+              </div>
+              <div class="project-card__body">
+                <div class="project-card__meta">
+                  <span class="project-card__badge">Full-stack / Platform</span>
+                  <span class="project-card__year">2025</span>
+                </div>
+                <h3 class="project-card__title">
+                  LinkSnip — Modern URL Shortener
+                </h3>
+                <p class="project-card__desc">
+                  Full-stack URL shortener prototype with custom aliases,
+                  expiry rules, QR codes, analytics, click events, and a live
+                  monitoring dashboard. Models a production Spring Boot,
+                  PostgreSQL, Redis, and RabbitMQ architecture in a zero-setup
+                  browser experience.
+                </p>
+                <ul class="tech-pill-list" aria-label="Technologies used">
+                  <li class="tech-pill">HTML</li>
+                  <li class="tech-pill">CSS</li>
+                  <li class="tech-pill">JavaScript</li>
+                  <li class="tech-pill">Spring Boot</li>
+                  <li class="tech-pill">PostgreSQL</li>
+                  <li class="tech-pill">Redis</li>
+                </ul>
+                <div class="project-card__links">
+                  <a
+                    href="https://github.com/Mohamedkabba444/LinkSnip-Modern-URL-Shortener"
+                    class="project-card__action-link"
+                    aria-label="View source on GitHub"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"
+                      />
+                    </svg>
+                    GitHub
+                  </a>
+                  <span class="project-card__availability">Demo coming soon</span>
+                </div>
+              </div>
+            </article>
+          </div>
+          <!-- /projects-grid -->
+        </div>
+      </section>
+
+      <hr class="section-divider" />
+
+      <!-- ── SKILLS ─────────────────────────────── -->
+      <section
+        class="page-section"
+        id="skills"
+        aria-labelledby="skills-headline"
+      >
+        <div class="container">
+          <div class="reveal" style="margin-bottom: 3.5rem">
+            <p class="eyebrow">Technical expertise</p>
+            <h2 class="section-headline" id="skills-headline">
+              The stack I build with
+            </h2>
+            <p
+              style="
+                color: var(--text-secondary);
+                font-size: 1.05rem;
+                line-height: 1.8;
+                max-width: 520px;
+              "
+            >
+              Building scalable distributed systems, APIs, and infrastructure
+              that power modern applications.
+            </p>
+          </div>
+
+          <div class="skills-layout" id="skills-section">
+            <!-- Left: animated progress bars -->
+            <div class="skill-list reveal-stagger">
+              <div class="skill-item">
+                <div class="skill-item__header">
+                  <span class="skill-item__name">Python / FastAPI</span>
+                  <span class="skill-item__pct" aria-hidden="true">95%</span>
+                </div>
+                <div
+                  class="skill-item__track"
+                  role="progressbar"
+                  aria-valuenow="95"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  aria-label="Python and FastAPI: 95%"
+                >
+                  <div
+                    class="skill-item__fill skill-item__fill--blue"
+                    data-fill-width="95"
+                  ></div>
+                </div>
+              </div>
+
+              <div class="skill-item">
+                <div class="skill-item__header">
+                    <span class="skill-item__name">HTML / CSS</span>
+                    <span class="skill-item__pct" aria-hidden="true">92%</span>
+                </div>
+                <div
+                  class="skill-item__track"
+                  role="progressbar"
+                  aria-valuenow="92"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  aria-label="HTML and CSS: 92%"
+                >
+                  <div
+                    class="skill-item__fill skill-item__fill--blue"
+                    data-fill-width="92"
+                  ></div>
+                </div>
+              </div>
+
+              <div class="skill-item">
+                <div class="skill-item__header">
+                  <span class="skill-item__name">Node.js / Express</span>
+                  <span class="skill-item__pct" aria-hidden="true">90%</span>
+                </div>
+                <div
+                  class="skill-item__track"
+                  role="progressbar"
+                  aria-valuenow="90"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  aria-label="Node.js and Express: 90%"
+                >
+                  <div
+                    class="skill-item__fill skill-item__fill--violet"
+                    data-fill-width="90"
+                  ></div>
+                </div>
+              </div>
+
+              <div class="skill-item">
+                <div class="skill-item__header">
+                    <span class="skill-item__name">JavaScript / TypeScript</span>
+                    <span class="skill-item__pct" aria-hidden="true">90%</span>
+                </div>
+                <div
+                  class="skill-item__track"
+                  role="progressbar"
+                  aria-valuenow="90"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  aria-label="JavaScript and TypeScript: 90%"
+                >
+                  <div
+                    class="skill-item__fill skill-item__fill--violet"
+                    data-fill-width="90"
+                  ></div>
+                </div>
+              </div>
+
+              <div class="skill-item">
+                <div class="skill-item__header">
+                  <span class="skill-item__name">PostgreSQL / Redis</span>
+                  <span class="skill-item__pct" aria-hidden="true">88%</span>
+                </div>
+                <div
+                  class="skill-item__track"
+                  role="progressbar"
+                  aria-valuenow="88"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  aria-label="PostgreSQL and Redis: 88%"
+                >
+                  <div
+                    class="skill-item__fill skill-item__fill--teal"
+                    data-fill-width="88"
+                  ></div>
+                </div>
+              </div>
+
+              <div class="skill-item">
+                <div class="skill-item__header">
+                  <span class="skill-item__name">Docker / Kubernetes</span>
+                  <span class="skill-item__pct" aria-hidden="true">80%</span>
+                </div>
+                <div
+                  class="skill-item__track"
+                  role="progressbar"
+                  aria-valuenow="80"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  aria-label="Docker and Kubernetes: 80%"
+                >
+                  <div
+                    class="skill-item__fill skill-item__fill--teal"
+                    data-fill-width="80"
+                  ></div>
+                </div>
+              </div>
+            </div>
+            <!-- /skill-list -->
+
+            <!-- Right: categorised tool pills -->
+            <div class="tools-column reveal">
+              <div>
+                <p class="tools-group-label">Frontend &amp; browser</p>
+                <div class="tools-pill-list">
+                  <span class="tool-pill tool-pill--featured">HTML</span>
+                  <span class="tool-pill tool-pill--featured">CSS</span>
+                  <span class="tool-pill tool-pill--featured">JavaScript</span>
+                  <span class="tool-pill">TypeScript</span>
+                  <span class="tool-pill">WebExtensions API</span>
+                  <span class="tool-pill">Accessibility</span>
+                </div>
+              </div>
+
+              <div>
+                <p class="tools-group-label">Backend &amp; APIs</p>
+                <div class="tools-pill-list">
+                  <span class="tool-pill tool-pill--featured">Python</span>
+                  <span class="tool-pill tool-pill--featured">Node.js</span>
+                  <span class="tool-pill tool-pill--featured">Java</span>
+                  <span class="tool-pill">FastAPI</span>
+                  <span class="tool-pill">Express</span>
+                  <span class="tool-pill">Spring Boot</span>
+                  <span class="tool-pill">GraphQL</span>
+                </div>
+              </div>
+
+              <div>
+                <p class="tools-group-label">Data &amp; infrastructure</p>
+                <div class="tools-pill-list">
+                  <span class="tool-pill tool-pill--featured">PostgreSQL</span>
+                  <span class="tool-pill tool-pill--featured">Redis</span>
+                  <span class="tool-pill">MongoDB</span>
+                  <span class="tool-pill">Prisma</span>
+                  <span class="tool-pill">Docker</span>
+                  <span class="tool-pill">Kubernetes</span>
+                  <span class="tool-pill">AWS</span>
+                  <span class="tool-pill">GCP</span>
+                </div>
+              </div>
+
+              <div>
+                <p class="tools-group-label">AI &amp; integrations</p>
+                <div class="tools-pill-list">
+                  <span class="tool-pill tool-pill--featured">Gemini API</span>
+                  <span class="tool-pill tool-pill--featured">LangChain</span>
+                  <span class="tool-pill">OpenAI</span>
+                  <span class="tool-pill">pgvector</span>
+                  <span class="tool-pill">Stripe</span>
+                  <span class="tool-pill">Plaid</span>
+                </div>
+              </div>
+            </div>
+            <!-- /tools-column -->
+          </div>
+          <!-- /skills-layout -->
+        </div>
+      </section>
+
+      <hr class="section-divider" />
+
+      <!-- ── CONTACT ─────────────────────────────── -->
+      <section
+        class="page-section"
+        id="contact"
+        aria-labelledby="contact-headline"
+      >
+        <div class="container contact-section-inner">
+          <div class="contact-card reveal">
+            <!-- Card header -->
+            <div class="contact-card__header">
+              <p class="eyebrow" style="justify-content: center">
+                Get in touch
+              </p>
+              <h2 class="contact-card__title" id="contact-headline">
+                Let's build something<br />together
+              </h2>
+              <p class="contact-card__subtitle">
+                Have a project in mind or just want to say hello? Fill in the
+                form, or email me directly at
+                <a href="mailto:kabbamohamed444@gmail.com"
+                  >kabbamohamed444@gmail.com</a
+                >
+              </p>
+            </div>
+
+            <!--
+            Contact form.
+            SETUP: Create a free account at formspree.io, make a new form,
+            then replace YOUR_FORM_ID below with your actual form ID.
+          -->
+            <form
+              class="contact-form"
+              id="contact-form"
+              novalidate
+              aria-label="Send a message to Mohamed Kabba"
+            >
+              <!-- Name + Email row -->
+              <div class="form-row">
+                <div class="form-field">
+                  <label class="form-label" for="contact-name">Name</label>
+                  <input
+                    class="form-input"
+                    id="contact-name"
+                    name="name"
+                    type="text"
+                    placeholder="Your full name"
+                    autocomplete="name"
+                    required
+                  />
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="contact-email">Email</label>
+                  <input
+                    class="form-input"
+                    id="contact-email"
+                    name="email"
+                    type="email"
+                    placeholder="you@example.com"
+                    autocomplete="email"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-field form-field--trap" aria-hidden="true">
+                <label class="form-label" for="contact-website">Website</label>
+                <input
+                  class="form-input"
+                  id="contact-website"
+                  name="website"
+                  type="text"
+                  tabindex="-1"
+                  autocomplete="off"
+                />
+              </div>
+
+              <!-- Subject -->
+              <div class="form-field">
+                <label class="form-label" for="contact-subject">Subject</label>
+                <input
+                  class="form-input"
+                  id="contact-subject"
+                  name="subject"
+                  type="text"
+                  placeholder="What's this about?"
+                  maxlength="120"
+                  required
+                />
+              </div>
+
+              <!-- Message -->
+              <div class="form-field">
+                <label class="form-label" for="contact-message">Message</label>
+                <textarea
+                  class="form-textarea"
+                  id="contact-message"
+                  name="message"
+                  placeholder="Tell me about your project, or just say hello…"
+                  rows="5"
+                  maxlength="3000"
+                  required
+                ></textarea>
+              </div>
+
+              <!-- Status + submit row -->
+              <div class="form-footer-row">
+                <p
+                  class="form-status-message"
+                  id="contact-status"
+                  role="status"
+                  aria-live="polite"
+                ></p>
+                <button
+                  type="submit"
+                  class="form-submit-btn"
+                  id="contact-submit-btn"
+                  aria-label="Send message"
+                >
+                  <span class="form-submit-btn__label">Send message</span>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M22 2L11 13" />
+                    <path d="M22 2L15 22l-4-9-9-4 20-7z" />
+                  </svg>
+                </button>
+              </div>
+            </form>
+
+            <!-- Social profile links -->
+            <div class="contact-socials" aria-label="Social profiles">
+              <a
+                href="https://github.com/Mohamedkabba444"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact-social-link"
+                aria-label="GitHub profile"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"
+                  />
+                </svg>
+                GitHub
+              </a>
+
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact-social-link"
+                aria-label="LinkedIn profile"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"
+                  />
+                  <rect x="2" y="9" width="4" height="12" />
+                  <circle cx="4" cy="4" r="2" />
+                </svg>
+                LinkedIn
+              </a>
+
+              <a
+                href="https://leetcode.com/u/BigO_Dev/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact-social-link"
+                aria-label="LeetCode profile"
+              >
+                <!-- Official LeetCode logo path -->
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  stroke="none"
+                  aria-hidden="true"
+                  style="color: currentColor"
+                >
+                  <path
+                    d="M13.483 0a1.374 1.374 0 00-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 00-1.209 2.104 5.35 5.35 0 00-.125.513 5.527 5.527 0 00.062 2.362 5.83 5.83 0 00.349 1.017 5.938 5.938 0 001.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 00-1.951-.003l-2.396 2.392a3.021 3.021 0 01-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 01.066-.523 2.545 2.545 0 01.619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 00-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0013.483 0zm-2.866 12.815a1.38 1.38 0 00-1.38 1.382 1.38 1.38 0 001.38 1.382H20.79a1.38 1.38 0 001.38-1.382 1.38 1.38 0 00-1.38-1.382z"
+                  />
+                </svg>
+                LeetCode
+              </a>
+            </div>
+
+            <!-- Resume Download Button -->
+            <div style="margin-top: 2rem; text-align: center">
+              <a
+                href="/MDK_Resume.pdf"
+                download
+                class="btn btn--primary"
+                style="display: inline-flex; align-items: center; gap: 0.5rem"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  style="width: 20px; height: 20px"
+                >
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+                Download Resume
+              </a>
+            </div>
+          </div>
+          <!-- /contact-card -->
+        </div>
+      </section>
+    </main>
+
+    <!-- ══════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════ -->
+    <footer class="site-footer" role="contentinfo">
+      <div class="site-footer__inner">
+        <a
+          href="#home"
+          class="footer-logo"
+          aria-label="Mohamed Kabba — back to top"
+        >
+          <!-- MDK Logo - Footer -->
+          <svg
+            class="site-logo-mark site-logo-mark--footer"
+            width="70"
+            height="32"
+            viewBox="0 0 70 36"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <defs>
+              <linearGradient
+                id="logo-grad-footer"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="0%"
+              >
+                <stop
+                  offset="0%"
+                  style="stop-color: #3b82f6; stop-opacity: 0.7"
+                />
+                <stop
+                  offset="100%"
+                  style="stop-color: #8b5cf6; stop-opacity: 0.7"
+                />
+              </linearGradient>
+            </defs>
+            <text
+              x="5"
+              y="26"
+              font-family="'Inter', 'Segoe UI', system-ui, sans-serif"
+              font-size="24"
+              font-weight="800"
+              letter-spacing="-1.5"
+              fill="url(#logo-grad-footer)"
+            >
+              MDK
+            </text>
+          </svg>
+        </a>
+
+        <p class="footer-copy">&copy; 2025 Mohamed Kabba. Built with care.</p>
+
+        <nav aria-label="Footer navigation">
+          <ul class="footer-nav" role="list">
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+    <script src="index.js"></script>
+  </body>
 </html>
