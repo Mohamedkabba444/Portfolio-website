@@ -11,6 +11,7 @@
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
 
   <header class="site-header">
     <div class="container site-header__inner">
@@ -29,6 +30,7 @@
         <ul class="site-nav__list">
           <li><a href="#about">About</a></li>
           <li><a href="#projects">Projects</a></li>
+          <li><a href="#building">Building now</a></li>
           <li><a href="#skills">Skills</a></li>
           <li><a href="#learning">Learning now</a></li>
           <li><a href="#contact">Contact</a></li>
@@ -40,9 +42,11 @@
   <main id="main-content">
     <!-- Hero -->
     <section class="hero" id="home" aria-labelledby="hero-heading">
-      <div class="container">
+      <div class="hero__glow hero__glow--teal" aria-hidden="true"></div>
+      <div class="hero__glow hero__glow--blue" aria-hidden="true"></div>
+      <div class="container hero__inner">
         <p class="hero__eyebrow">Software Engineering Student · University of the Potomac</p>
-        <h1 id="hero-heading">Mohamed Kabba</h1>
+        <h1 id="hero-heading">Mohamed <span class="gradient-text">Kabba</span></h1>
         <p class="hero__role">Backend with Python &amp; FastAPI · Learning AWS</p>
         <p class="hero__summary">
           I&rsquo;m a computer science student in Washington, DC, learning backend
@@ -51,6 +55,11 @@
           projects. I&rsquo;m looking for a Summer 2027 software engineering
           internship where I can keep growing.
         </p>
+        <div class="terminal" role="note" aria-label="Now building: Cloud Task API with FastAPI, PostgreSQL and JWT, deploying to EC2 and RDS">
+          <span class="terminal__prompt" aria-hidden="true">$</span>
+          <span class="terminal__text">now building — Cloud Task API · FastAPI + PostgreSQL + JWT · EC2 / RDS</span>
+          <span class="terminal__cursor" aria-hidden="true"></span>
+        </div>
         <ul class="hero__status" aria-label="Current status">
           <li class="status-chip">
             <span class="status-chip__dot" aria-hidden="true"></span>
@@ -59,9 +68,14 @@
           <li class="status-chip">AWS Cloud Practitioner — in progress</li>
         </ul>
         <p class="hero__actions">
-          <a class="button button--primary" href="#projects">View my projects</a>
+          <a class="button button--primary" href="#projects">View my projects
+            <svg class="button__icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
           <a class="button" href="mailto:kabbamohamed444@gmail.com">Email me</a>
-          <a class="button" href="https://github.com/Mohamedkabba444" rel="noopener">GitHub</a>
+          <a class="button" href="https://github.com/Mohamedkabba444" rel="noopener">
+            <svg class="button__icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            GitHub
+          </a>
         </p>
       </div>
     </section>
@@ -69,9 +83,15 @@
     <!-- About -->
     <section class="section" id="about" aria-labelledby="about-heading">
       <div class="container">
-        <h2 id="about-heading">About</h2>
+        <div class="section-head reveal">
+          <p class="section-head__eyebrow">
+            <svg class="section-head__icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            About
+          </p>
+          <h2 id="about-heading">Student, builder, honest about both</h2>
+        </div>
         <div class="about__grid">
-          <div>
+          <div class="reveal">
             <p>
               I&rsquo;m studying software engineering at the University of the
               Potomac in Washington, DC. I started with Python and fell in love
@@ -91,7 +111,7 @@
               actually show you running.
             </p>
           </div>
-          <dl class="facts">
+          <dl class="facts reveal">
             <div class="facts__row">
               <dt>Degree</dt>
               <dd>B.S. CS / Software Engineering</dd>
@@ -117,18 +137,29 @@
       </div>
     </section>
 
-    <!-- Projects -->
+    <!-- Projects: built -->
     <section class="section section--alt" id="projects" aria-labelledby="projects-heading">
       <div class="container">
-        <h2 id="projects-heading">Projects</h2>
-        <p class="section__intro">
-          Real projects, in the state they&rsquo;re actually in. Anything marked
-          &ldquo;in progress&rdquo; is work I&rsquo;m doing right now — not finished yet.
-        </p>
+        <div class="section-head reveal">
+          <p class="section-head__eyebrow">
+            <svg class="section-head__icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+            Projects
+          </p>
+          <h2 id="projects-heading">Built — real, working, on GitHub</h2>
+          <p class="section__intro">
+            These two are finished and public. Everything further down the page
+            is work in progress, labeled as such.
+          </p>
+        </div>
 
         <div class="project-grid">
-          <article class="card">
-            <p class="card__status"><span class="badge badge--done">Built</span></p>
+          <article class="card reveal">
+            <div class="card__top">
+              <span class="card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+              </span>
+              <p class="card__status"><span class="badge badge--done">Built</span></p>
+            </div>
             <h3 class="card__title">TabSnapshot</h3>
             <p class="card__text">
               A privacy-first browser extension that captures and restores
@@ -146,8 +177,13 @@
             </p>
           </article>
 
-          <article class="card">
-            <p class="card__status"><span class="badge badge--done">Built · prototype</span></p>
+          <article class="card reveal">
+            <div class="card__top">
+              <span class="card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>
+              </span>
+              <p class="card__status"><span class="badge badge--done">Built · prototype</span></p>
+            </div>
             <h3 class="card__title">LinkSnip — Modern URL Shortener</h3>
             <p class="card__text">
               A full-stack URL shortener prototype with custom aliases, expiry
@@ -168,43 +204,140 @@
               <a href="https://github.com/Mohamedkabba444/LinkSnip-Modern-URL-Shortener" rel="noopener">View on GitHub <span aria-hidden="true">&rarr;</span></a>
             </p>
           </article>
+        </div>
+      </div>
+    </section>
 
-          <article class="card">
-            <p class="card__status"><span class="badge">In progress</span></p>
-            <h3 class="card__title">Task API</h3>
+    <!-- Building now -->
+    <section class="section section--building" id="building" aria-labelledby="building-heading">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="section-head__eyebrow">
+            <svg class="section-head__icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+            Building now
+          </p>
+          <h2 id="building-heading">The roadmap, in progress</h2>
+          <p class="section__intro">
+            These are the projects from my plan — a cloud-deployed API, a
+            serverless app, a secure file platform, and my first open-source
+            contribution. Each one is being built step by step, and the badges
+            say so honestly: <strong>in progress</strong> means not finished yet.
+          </p>
+        </div>
+
+        <div class="project-grid">
+          <article class="card card--building reveal">
+            <div class="card__top">
+              <span class="card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 12l2 2 4-4"/></svg>
+              </span>
+              <p class="card__status"><span class="badge">In progress</span></p>
+            </div>
+            <h3 class="card__title">Cloud-Deployed Task &amp; Team Workflow API</h3>
             <p class="card__text">
-              A task manager API in FastAPI, built step by step as part of my
-              backend learning roadmap. In-memory storage first, then
-              PostgreSQL persistence, authentication, tests, Docker, and an
-              AWS deployment. Code lands on GitHub as each part is finished.
+              A multi-user task management API with full CRUD, task status and
+              priority, due dates, and per-user ownership — each user only
+              sees their own tasks. JWT registration and login with hashed
+              passwords and correct HTTP status codes (201 on creation, 404
+              for missing resources, 401 when unauthorized). Deploying to AWS
+              on EC2 behind security groups, with data in a managed
+              PostgreSQL database (RDS).
             </p>
             <ul class="tag-list" aria-label="Technologies">
               <li>Python</li>
               <li>FastAPI</li>
+              <li>PostgreSQL</li>
+              <li>JWT</li>
+              <li>Docker</li>
+              <li>AWS EC2</li>
+              <li>RDS</li>
             </ul>
             <p class="card__links">
-              <a href="https://github.com/Mohamedkabba444?tab=repositories" rel="noopener">More on GitHub <span aria-hidden="true">&rarr;</span></a>
+              <a href="https://github.com/Mohamedkabba444?tab=repositories" rel="noopener">Follow progress on GitHub <span aria-hidden="true">&rarr;</span></a>
             </p>
           </article>
 
-          <article class="card">
-            <p class="card__status"><span class="badge">In progress</span></p>
-            <h3 class="card__title">AWS hands-on</h3>
+          <article class="card card--building reveal">
+            <div class="card__top">
+              <span class="card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              </span>
+              <p class="card__status"><span class="badge">In progress</span></p>
+            </div>
+            <h3 class="card__title">Serverless Internship Application Tracker</h3>
             <p class="card__text">
-              Learning AWS by using it. So far I&rsquo;ve launched a real EC2
-              instance (t3.micro) running an nginx web server, and built an
-              SQS queue that triggers a Lambda function, monitored in
-              CloudWatch. Next: the AWS Certified Cloud Practitioner exam.
+              A serverless web app to track internship applications — company,
+              role, deadline, status, and notes — in one searchable
+              dashboard. API Gateway routes to Python Lambda functions, data
+              lives in DynamoDB, and the front end is hosted on S3 and
+              delivered through CloudFront, with least-privilege IAM roles
+              for each function.
             </p>
             <ul class="tag-list" aria-label="Technologies">
-              <li>AWS EC2</li>
+              <li>Python</li>
               <li>AWS Lambda</li>
-              <li>Amazon SQS</li>
-              <li>CloudWatch</li>
-              <li>nginx</li>
+              <li>API Gateway</li>
+              <li>DynamoDB</li>
+              <li>S3</li>
+              <li>CloudFront</li>
             </ul>
             <p class="card__links">
-              <a href="https://github.com/Mohamedkabba444" rel="noopener">More on GitHub <span aria-hidden="true">&rarr;</span></a>
+              <a href="https://github.com/Mohamedkabba444?tab=repositories" rel="noopener">Follow progress on GitHub <span aria-hidden="true">&rarr;</span></a>
+            </p>
+          </article>
+
+          <article class="card card--building reveal">
+            <div class="card__top">
+              <span class="card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/><path d="M12 12v6"/><path d="M9.5 15.5L12 13l2.5 2.5"/></svg>
+              </span>
+              <p class="card__status"><span class="badge">In progress</span></p>
+            </div>
+            <h3 class="card__title">Secure Personal File-Sharing &amp; Portfolio Platform</h3>
+            <p class="card__text">
+              A secure file-sharing and portfolio site on S3 with CloudFront
+              delivery — organized folders and shareable download links that
+              don&rsquo;t expose the underlying bucket. Private by default with
+              public access blocked, IAM and bucket policies, pre-signed URLs
+              generated with Python and boto3 for time-limited sharing, and
+              automated uploads and cache invalidation.
+            </p>
+            <ul class="tag-list" aria-label="Technologies">
+              <li>AWS S3</li>
+              <li>CloudFront</li>
+              <li>IAM</li>
+              <li>Python</li>
+              <li>boto3</li>
+              <li>HTML / CSS</li>
+            </ul>
+            <p class="card__links">
+              <a href="https://github.com/Mohamedkabba444?tab=repositories" rel="noopener">Follow progress on GitHub <span aria-hidden="true">&rarr;</span></a>
+            </p>
+          </article>
+
+          <article class="card card--building reveal">
+            <div class="card__top">
+              <span class="card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>
+              </span>
+              <p class="card__status"><span class="badge">In progress</span></p>
+            </div>
+            <h3 class="card__title">Open Source Contributor — FastAPI</h3>
+            <p class="card__text">
+              Contributing to the FastAPI project itself: improving
+              documentation and examples, reproducing reported issues with
+              minimal test cases, and writing pytest tests. The goal is a
+              first merged pull request — the real bar for calling this one
+              done.
+            </p>
+            <ul class="tag-list" aria-label="Technologies">
+              <li>Python</li>
+              <li>FastAPI</li>
+              <li>pytest</li>
+              <li>GitHub</li>
+            </ul>
+            <p class="card__links">
+              <a href="https://github.com/fastapi/fastapi" rel="noopener">FastAPI on GitHub <span aria-hidden="true">&rarr;</span></a>
             </p>
           </article>
         </div>
@@ -214,15 +347,24 @@
     <!-- Skills -->
     <section class="section" id="skills" aria-labelledby="skills-heading">
       <div class="container">
-        <h2 id="skills-heading">Skills</h2>
-        <p class="section__intro">
-          What I actually use — with honest labels. &ldquo;Learning&rdquo; means
-          I&rsquo;m using it now and still growing; &ldquo;coursework&rdquo; means
-          I&rsquo;ve studied and used it in class.
-        </p>
+        <div class="section-head reveal">
+          <p class="section-head__eyebrow">
+            <svg class="section-head__icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            Skills
+          </p>
+          <h2 id="skills-heading">The stack I build with</h2>
+          <p class="section__intro">
+            What I actually use — with honest labels. &ldquo;Learning&rdquo; means
+            I&rsquo;m using it now and still growing; &ldquo;coursework&rdquo; means
+            I&rsquo;ve studied and used it in class.
+          </p>
+        </div>
         <div class="skill-grid">
-          <div class="skill-group">
-            <h3>Languages</h3>
+          <div class="skill-group reveal">
+            <h3>
+              <svg class="skill-group__icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              Languages
+            </h3>
             <ul>
               <li>Python</li>
               <li>JavaScript</li>
@@ -231,8 +373,11 @@
               <li>SQL <span class="skill-note">coursework</span></li>
             </ul>
           </div>
-          <div class="skill-group">
-            <h3>Backend &amp; APIs</h3>
+          <div class="skill-group reveal">
+            <h3>
+              <svg class="skill-group__icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+              Backend &amp; APIs
+            </h3>
             <ul>
               <li>FastAPI <span class="skill-note">learning</span></li>
               <li>REST APIs <span class="skill-note">learning</span></li>
@@ -240,8 +385,11 @@
               <li>Spring Boot <span class="skill-note">coursework</span></li>
             </ul>
           </div>
-          <div class="skill-group">
-            <h3>Tools &amp; cloud</h3>
+          <div class="skill-group reveal">
+            <h3>
+              <svg class="skill-group__icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+              Tools &amp; cloud
+            </h3>
             <ul>
               <li>Git &amp; GitHub</li>
               <li>AWS <span class="skill-note">in progress — EC2, Lambda, SQS, CloudWatch</span></li>
@@ -256,20 +404,26 @@
     <!-- Learning now -->
     <section class="section section--alt" id="learning" aria-labelledby="learning-heading">
       <div class="container">
-        <h2 id="learning-heading">Learning now</h2>
+        <div class="section-head reveal">
+          <p class="section-head__eyebrow">
+            <svg class="section-head__icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+            Learning now
+          </p>
+          <h2 id="learning-heading">What I&rsquo;m working on this week</h2>
+        </div>
         <ol class="learning-list">
-          <li>
+          <li class="reveal">
             <strong>AWS Cloud Practitioner Essentials</strong> — Modules 1–3
             complete, with hands-on practice on EC2, Lambda, SQS, and
             CloudWatch. Exam goal: AWS Certified Cloud Practitioner
             (not yet earned).
           </li>
-          <li>
+          <li class="reveal">
             <strong>Backend roadmap</strong> — Task API in FastAPI, then
             PostgreSQL, JWT authentication, pytest, Docker, and deployment
             on AWS.
           </li>
-          <li>
+          <li class="reveal">
             <strong>Open source</strong> — working toward a first merged
             pull request in the FastAPI project (documentation, examples,
             and tests).
@@ -281,26 +435,35 @@
     <!-- Contact -->
     <section class="section" id="contact" aria-labelledby="contact-heading">
       <div class="container">
-        <h2 id="contact-heading">Contact</h2>
-        <p class="section__intro">
-          I&rsquo;m looking for a Summer 2027 software engineering internship.
-          The fastest way to reach me is email.
-        </p>
+        <div class="section-head reveal">
+          <p class="section-head__eyebrow">
+            <svg class="section-head__icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Contact
+          </p>
+          <h2 id="contact-heading">Let&rsquo;s talk</h2>
+          <p class="section__intro">
+            I&rsquo;m looking for a Summer 2027 software engineering internship.
+            The fastest way to reach me is email.
+          </p>
+        </div>
         <ul class="contact-list">
-          <li>
+          <li class="reveal">
             <a href="mailto:kabbamohamed444@gmail.com">
+              <svg class="contact-list__icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
               <span class="contact-list__label">Email</span>
               <span>kabbamohamed444@gmail.com</span>
             </a>
           </li>
-          <li>
+          <li class="reveal">
             <a href="https://github.com/Mohamedkabba444" rel="noopener">
+              <svg class="contact-list__icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
               <span class="contact-list__label">GitHub</span>
               <span>github.com/Mohamedkabba444</span>
             </a>
           </li>
-          <li>
+          <li class="reveal">
             <a href="https://www.linkedin.com/in/mohamed-kabba-2a804631b" rel="noopener">
+              <svg class="contact-list__icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
               <span class="contact-list__label">LinkedIn</span>
               <span>linkedin.com/in/mohamed-kabba-2a804631b</span>
             </a>
@@ -319,5 +482,9 @@
       </p>
     </div>
   </footer>
+
+  <a class="back-to-top" href="#home" id="back-to-top" aria-label="Back to top" hidden>
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+  </a>
 </body>
 </html>
