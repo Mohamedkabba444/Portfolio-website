@@ -43,8 +43,13 @@
 
     window.scrollTo({
       top: scrollDestination,
-      behavior: "smooth",
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "auto"
+        : "smooth",
     });
+    if (window.history && window.history.replaceState) {
+      window.history.replaceState(null, "", targetHash);
+    }
 
     // Close the mobile menu if it is currently open.
     // Guard: only call if the panel element actually exists.
@@ -126,6 +131,47 @@
   window.addEventListener("load", function () {
     highlightActiveSection(detectActiveSection());
   });
+})();
+
+/* ──────────────────────────────────────────────────────────
+ * B2. SCROLL PROGRESS AND NAVIGATION DEPTH
+ *    Updates one transform and the nav elevation, throttled to
+ *    animation frames to keep scroll handling inexpensive.
+ * ────────────────────────────────────────────────────────── */
+(function initScrollDepth() {
+  var progressBar = document.querySelector(".scroll-progress__bar");
+  var siteNav = document.querySelector(".site-nav");
+  var rafScheduled = false;
+
+  if (!progressBar && !siteNav) return;
+
+  function updateScrollDepth() {
+    var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    var scrollable =
+      document.documentElement.scrollHeight - window.innerHeight;
+    var progress =
+      scrollable > 0 ? Math.min(1, Math.max(0, scrollTop / scrollable)) : 0;
+
+    if (progressBar) {
+      progressBar.style.transform = "scaleX(" + progress + ")";
+    }
+    if (siteNav) {
+      siteNav.classList.toggle("is-scrolled", scrollTop > 12);
+    }
+    rafScheduled = false;
+  }
+
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (rafScheduled) return;
+      rafScheduled = true;
+      requestAnimationFrame(updateScrollDepth);
+    },
+    { passive: true },
+  );
+
+  updateScrollDepth();
 })();
 
 /* ──────────────────────────────────────────────────────────
@@ -228,9 +274,9 @@ function closeMobileMenu() {
       });
     },
     {
-      threshold: 0 /* trigger the instant ANY pixel is visible */,
+      threshold: 0.12,
       rootMargin:
-        "0px 0px -60px 0px" /* don't fire until 60px above fold-bottom */,
+        "0px 0px -48px 0px",
     },
   );
 
@@ -240,64 +286,29 @@ function closeMobileMenu() {
 })();
 
 /* ──────────────────────────────────────────────────────────
- * E. SKILL BAR FILL ANIMATIONS
- *    Each .skill-item__fill stores its target width in the
- *    data-fill-width attribute. Bars animate from 0 to that
- *    value the first time the skills section enters view.
- *    Uses staggered timeouts (80ms apart) for a cascade effect.
+ * D2. PROJECT CARD SPOTLIGHT
+ *    Adds a restrained brass spotlight that follows the pointer
+ *    over project previews. Disabled for touch/reduced-motion.
  * ────────────────────────────────────────────────────────── */
-(function initSkillBarAnimations() {
-  var skillsSection = document.getElementById("skills-section");
-  if (!skillsSection) return;
+(function initProjectSpotlight() {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
 
-  /*
-   * Fill bars immediately in all cases.
-   * When reduced-motion is active, the CSS transition:none rule
-   * makes them snap to width instantly. When motion is allowed,
-   * the CSS transition: width 1.2s makes them animate smoothly.
-   * Either way we don't need to detect the preference here —
-   * CSS handles it.
-   *
-   * If IntersectionObserver is available, wait for the skills
-   * section to scroll into view before filling. Otherwise fill now.
-   */
-  function fillBars() {
-    document
-      .querySelectorAll(".skill-item__fill")
-      .forEach(function (bar, index) {
-        var targetWidth = bar.getAttribute("data-fill-width");
-        /* Small per-bar stagger so they cascade nicely when animated */
-        setTimeout(function () {
-          bar.style.width = targetWidth + "%";
-        }, index * 80);
-      });
-  }
-
-  var ioReady = document.documentElement.classList.contains("js-io-ready");
-  if (!ioReady) {
-    fillBars();
-    return;
-  }
-
-  var hasAnimated = false;
-  var skillsObserver = new IntersectionObserver(
-    function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting && !hasAnimated) {
-          hasAnimated = true;
-          fillBars();
-          skillsObserver.unobserve(skillsSection);
-        }
-      });
-    },
-    { threshold: 0, rootMargin: "0px 0px -40px 0px" },
-  );
-
-  skillsObserver.observe(skillsSection);
+  document.querySelectorAll(".project-card").forEach(function (card) {
+    card.addEventListener("pointermove", function (event) {
+      var visual = card.querySelector(".project-card__visual");
+      if (!visual) return;
+      var rect = visual.getBoundingClientRect();
+      var x = ((event.clientX - rect.left) / rect.width) * 100;
+      var y = ((event.clientY - rect.top) / rect.height) * 100;
+      visual.style.setProperty("--spotlight-x", x.toFixed(1) + "%");
+      visual.style.setProperty("--spotlight-y", y.toFixed(1) + "%");
+    });
+  });
 })();
 
 /* ──────────────────────────────────────────────────────────
- * F. CONTACT FORM
+ * E. CONTACT FORM
  *    Validates all fields client-side with per-field error
  *    states, then submits to Formspree via fetch().
  *
